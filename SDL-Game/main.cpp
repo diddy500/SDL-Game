@@ -1,6 +1,45 @@
 #include <SDL.h>
 #include <iostream>
+#include <string>
 #include "Cleanup.h"
+
+void logSDLError(std::ostream &os, const std::string &msg)
+{
+	os << msg << " error: " << SDL_GetError() << std::endl;
+}
+
+SDL_Texture* loadTexture(const std::string &file, SDL_Renderer *ren)
+{
+	SDL_Texture *texture = nullptr;
+	SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
+
+	if (loadedImage != nullptr)
+	{
+		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
+		cleanup(loadedImage);
+
+		if (texture == nullptr)
+			logSDLError(std::cout, "CreateTextureFromSurface");
+
+	}
+	else
+	{
+		logSDLError(std::cout, "LoadBMP");
+	}
+	return texture;
+}
+
+void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
+{
+	SDL_Rect dst;
+	dst.x = x;
+	dst.y = y;
+
+	SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
+	SDL_RenderCopy(ren, tex, NULL, &dst);
+}
+
+
 
 int main(int argc, char *argv[])
 {
