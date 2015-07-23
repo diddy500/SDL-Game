@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Cleanup.h"
 
 const int SCREEN_WIDTH = 640;
@@ -32,16 +33,28 @@ SDL_Texture* loadTexture(const std::string &file, SDL_Renderer *ren)
 	return texture;
 }
 
-void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y)
+void renderTexture(SDL_Texture* tex, SDL_Renderer* ren, SDL_Rect dst, SDL_Rect* clip = nullptr)
+{
+	SDL_RenderCopy(ren, tex, clip, &dst);
+}
+void renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y, SDL_Rect* clip = nullptr)
 {
 	SDL_Rect dst;
 	dst.x = x;
 	dst.y = y;
 
-	SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
-	SDL_RenderCopy(ren, tex, NULL, &dst);
-}
+	if (clip != nullptr)
+	{
+		dst.w = clip->w;
+		dst.h = clip->h;
+	}
+	else
+	{
+		SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
+	}
 
+	renderTexture(tex, ren, dst, clip);
+}
 
 
 int main(int argc, char *argv[])
@@ -69,33 +82,84 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	SDL_Texture *background = loadTexture("res/background.bmp", renderer);
-	SDL_Texture *image = loadTexture("res/image.bmp", renderer);
-	if (background == nullptr || image == nullptr)
+	SDL_Texture *image = loadTexture("res/curses_square_16x16.bmp", renderer);
+	if (image == nullptr)
 	{
-		cleanup(background, image, renderer, window);
+		cleanup(image, renderer, window);
 		SDL_Quit();
 		return 1;
 	}
 
-	SDL_RenderClear(renderer);
-
-	int bW, bH;
-	SDL_QueryTexture(background, NULL, NULL, &bW, &bH);
-	renderTexture(background, renderer, 0, 0);
-	renderTexture(background, renderer, bW, 0);
-	renderTexture(background, renderer, 0, bH);
-	renderTexture(background, renderer, bW, bH);
-
-	int iW, iH;
-	SDL_QueryTexture(image, NULL, NULL, &iW, &iH);
+	//iW and iH are the clip width and height
+	//We'll be drawing only clips so get a center position for the w/h of a clip
+	int iW = 16, iH = 16;
 	int x = SCREEN_WIDTH / 2 - iW / 2;
 	int y = SCREEN_HEIGHT / 2 - iH / 2;
-	renderTexture(image, renderer, x, y);
 
-	SDL_RenderPresent(renderer);
-	SDL_Delay(1000);
+	//Setup the clips for our image
+	std::vector<SDL_Rect> clips;
 
-	cleanup(background, image, renderer, window);
+	SDL_Rect sheet;
+	SDL_QueryTexture(image, NULL, NULL, &sheet.w, &sheet.h);
+
+	for (int i = 0; i < (sheet.h / iH); ++i)
+	{
+		for (int j = 0; j < (sheet.w / iW); ++j)
+		{
+			SDL_Rect rect;
+			rect.x = (j * 16);
+			rect.y = (i * 16);
+			rect.w = iW;
+			rect.h = iH;
+			clips.push_back(rect);
+
+		}
+	}
+	//Specify a default clip to start with
+	int useClip = 0;
+
+	SDL_Event e;
+	bool quit = false;
+
+	while (!quit)
+	{
+		while (SDL_PollEvent(&e)){
+			if (e.type == SDL_QUIT)
+				quit = true;
+			//Use number input to select which clip should be drawn
+			if (e.type == SDL_KEYDOWN){
+
+			
+
+				switch (e.key.keysym.sym)
+				{
+				case SDLK_RIGHT:
+					if (useClip < clips.size() - 1)
+						useClip += 1;
+					break;
+				case SDLK_LEFT:
+					if (useClip > 0)
+						useClip -= 1;
+					break;
+				case SDLK_ESCAPE:
+					quit = true;
+					break;
+				default:
+					break;
+				}
+				std::cout << useClip << std::endl;
+			}
+		}
+
+		
+
+		SDL_RenderClear(renderer);
+		renderTexture(image, renderer, x, y, &clips[useClip]);
+		SDL_RenderPresent(renderer);
+
+	}
+
+	cleanup(image, renderer, window);
 	SDL_Quit();
+	return 0;
 }
