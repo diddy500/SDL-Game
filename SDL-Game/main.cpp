@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	Window win("res/curses_square_16x16.bmp", 640, 480, 16, 16);
+	Window win("Resources/curses_square_16x16.bmp", 640, 480, 16, 16);
 
 	SDL_Event e;
 	bool quit = false;

@@ -22,10 +22,10 @@ Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int
 	int tileNum = 0;
 	for (int i = 0; i < ((SCREEN_WIDTH / sheet->GetSpriteWidth()) * (SCREEN_HEIGHT / sheet->GetSpriteHeight())); i++)
 	{
-		tileNum++;
 		if (tileNum > 255)
 			tileNum = 0;
 		screenTiles.push_back(tileNum);
+		tileNum++;
 	}
 
 }
