@@ -3,7 +3,7 @@
 
 Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int spriteH) : SCREEN_WIDTH(screenW), SCREEN_HEIGHT(screenH)
 {
-	window = SDL_CreateWindow("Lesson 2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Dorfs", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr)
 	{
 		logSDLError(std::cout, "CreateWindow");
@@ -19,6 +19,14 @@ Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int
 	}
 
 	sheet = new SpriteSheet(sheetPath, renderer, spriteW, spriteH);
+	int tileNum = 0;
+	for (int i = 0; i < ((SCREEN_WIDTH / sheet->GetSpriteWidth()) * (SCREEN_HEIGHT / sheet->GetSpriteHeight())); i++)
+	{
+		tileNum++;
+		if (tileNum > 255)
+			tileNum = 0;
+		screenTiles.push_back(tileNum);
+	}
 
 }
 
@@ -41,7 +49,7 @@ void Window::updateWindow()
 		for (int j = 0; j < col; j++)
 		{
 
-			sheet->renderTexture(j * sheet->GetSpriteWidth(), i * sheet->GetSpriteHeight(), 2);
+			sheet->renderTexture(j * sheet->GetSpriteWidth(), i * sheet->GetSpriteHeight(), screenTiles[j + i * col]);
 		}
 	}
 

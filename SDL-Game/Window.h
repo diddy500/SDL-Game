@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <vector>
 #include "Utilities.h"
 #include "Cleanup.h"
 #include "SpriteSheet.h"
@@ -13,7 +14,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SpriteSheet* sheet;
-
+	std::vector<int> screenTiles;
 
 
 public:
