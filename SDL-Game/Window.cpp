@@ -19,13 +19,11 @@ Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int
 	}
 
 	sheet = new SpriteSheet(sheetPath, renderer, spriteW, spriteH);
-	int tileNum = 0;
+
 	for (int i = 0; i < ((SCREEN_WIDTH / sheet->GetSpriteWidth()) * (SCREEN_HEIGHT / sheet->GetSpriteHeight())); i++)
 	{
-		if (tileNum > 255)
-			tileNum = 0;
-		screenTiles.push_back(tileNum);
-		tileNum++;
+		screenTiles.push_back(0);
+		screenTilesBackground.push_back(0);
 	}
 
 }
@@ -33,8 +31,9 @@ Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int
 
 Window::~Window()
 {
+	cleanup(window, renderer);
+	delete sheet;
 }
-
 
 
 void Window::updateWindow()
@@ -54,4 +53,22 @@ void Window::updateWindow()
 	}
 
 	SDL_RenderPresent(renderer);
+}
+
+void Window::SetScreenTile(int x, int y, int spriteNum)
+{
+	screenTiles[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()] = spriteNum;
+}
+int Window::GetScreenTile(int x, int y)
+{
+	return screenTiles[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()];
+}
+
+void Window::SetBackgroundTile(int x, int y, int spriteNum)
+{
+	screenTilesBackground[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()] = spriteNum;
+}
+int Window::GetBackgroundTile(int x, int y)
+{
+	return screenTilesBackground[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()];
 }

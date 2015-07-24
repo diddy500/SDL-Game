@@ -25,6 +25,7 @@ SpriteSheet::SpriteSheet(std::string file, SDL_Renderer* renderer, int spriteW, 
 
 SpriteSheet::~SpriteSheet()
 {
+	cleanup(texture);
 }
 
 
