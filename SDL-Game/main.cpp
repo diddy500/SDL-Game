@@ -4,8 +4,7 @@
 #include <vector>
 #include "Cleanup.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+
 
 void logSDLError(std::ostream &os, const std::string &msg)
 {
@@ -19,6 +18,8 @@ SDL_Texture* loadTexture(const std::string &file, SDL_Renderer *ren)
 
 	if (loadedImage != nullptr)
 	{
+		SDL_SetColorKey(loadedImage, SDL_TRUE, SDL_MapRGB(loadedImage->format, 0xFF, 0x00, 0xFF));
+		
 		texture = SDL_CreateTextureFromSurface(ren, loadedImage);
 		cleanup(loadedImage);
 
@@ -56,9 +57,27 @@ void renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y, SDL_Rect* 
 	renderTexture(tex, ren, dst, clip);
 }
 
+void updateWindow(SDL_Texture* sheet, SDL_Renderer* ren, std::vector<SDL_Rect> clips, const int screenW, const int screenH, const int spriteW, const int spriteH)
+{
+	int col = screenW / spriteW;
+	int row = screenH / spriteH;
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			renderTexture(sheet, ren, j * spriteW, i * spriteH, &clips[(i)]);
+		}
+	}
+}
+
 
 int main(int argc, char *argv[])
 {
+
+	const int SCREEN_WIDTH = 640;
+	const int SCREEN_HEIGHT = 480;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		logSDLError(std::cout, "SDL_Init");
@@ -129,32 +148,17 @@ int main(int argc, char *argv[])
 			//Use number input to select which clip should be drawn
 			if (e.type == SDL_KEYDOWN){
 
-			
-
-				switch (e.key.keysym.sym)
+				if (e.key.keysym.sym == SDLK_ESCAPE)
 				{
-				case SDLK_RIGHT:
-					if (useClip < clips.size() - 1)
-						useClip += 1;
-					break;
-				case SDLK_LEFT:
-					if (useClip > 0)
-						useClip -= 1;
-					break;
-				case SDLK_ESCAPE:
 					quit = true;
-					break;
-				default:
-					break;
 				}
-				std::cout << useClip << std::endl;
 			}
 		}
 
 		
 
 		SDL_RenderClear(renderer);
-		renderTexture(image, renderer, x, y, &clips[useClip]);
+		updateWindow(image, renderer, clips, SCREEN_WIDTH, SCREEN_HEIGHT, iW, iH);
 		SDL_RenderPresent(renderer);
 
 	}
