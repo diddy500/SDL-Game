@@ -12,9 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
+    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cleanup.h" />
+    <ClInclude Include="SpriteSheet.h" />
+    <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FFDB5F01-B580-43DA-8244-8E5F4F16F0C5}</ProjectGuid>
