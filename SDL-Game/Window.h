@@ -15,11 +15,12 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SpriteSheet* sheet;
-	Level lev;
+	Level* lev;
+	Entity* entCamFollows;
 	std::vector<int> screenTiles;
 
 public:
-	Window(std::string sheetPath, int screenW, int screenH, int spriteW, int spriteH);
+	Window(SDL_Window* window, SDL_Renderer* renderer, SpriteSheet* sheet, Level* lev,Entity* camFollow, int screenW, int screenH);
 	~Window();
 
 	void updateWindow();

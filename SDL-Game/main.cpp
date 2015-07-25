@@ -8,20 +8,54 @@
 #include "Utilities.h"
 #include "Cleanup.h"
 #include "Window.h"
-
+#include "Player.h"
 
 
 int main(int argc, char *argv[])
 {
+	//config information
+	const int LEVEL_WIDTH = 60;
+	const int LEVEL_HEIGHT = 60;
+	const int SCREEN_WIDTH = 640;
+	const int SCREEN_HEIGHT = 480;
+	const int SPRITE_WIDTH = 16;
+	const int SPRITE_HEIGHT = 16;
+	const std::string SHEET_PATH = "Resources/curses_square_16x16.bmp";
 
 
+	//Init
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		logSDLError(std::cout, "SDL_Init");
 		return 1;
 	}
 
-	Window win("Resources/curses_square_16x16.bmp", 640, 480, 16, 16);
+	SDL_Window* window = SDL_CreateWindow("Dorfs", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	if (window == nullptr)
+	{
+		logSDLError(std::cout, "CreateWindow");
+		SDL_Quit();
+	}
+
+	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (renderer == nullptr)
+	{
+		logSDLError(std::cout, "CreateRenderer");
+		cleanup(window);
+		SDL_Quit();
+	}
+
+	SpriteSheet* sheet = new SpriteSheet(SHEET_PATH, renderer, SPRITE_WIDTH, SPRITE_HEIGHT);
+
+	Level* lev = new Level(LEVEL_WIDTH, LEVEL_HEIGHT);
+
+	lev->GenerateLevel();
+
+	Player* player = new Player(LEVEL_WIDTH, LEVEL_HEIGHT, 30, 30);
+
+	lev->tokenList.AddNode(player);
+
+	Window win(window, renderer, sheet, lev, player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	
 
@@ -53,6 +87,7 @@ int main(int argc, char *argv[])
 					{
 						quit = true;
 					}
+					player->Move(e.key.keysym.sym);
 
 				}
 			}

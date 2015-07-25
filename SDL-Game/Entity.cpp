@@ -1,8 +1,10 @@
 #include "Entity.h"
 
 
-Entity::Entity(int spriteNum, int x, int y)
+Entity::Entity(int spriteNum, int maxX, int maxY, int x, int y)
 {
+	this->maxX = maxX;
+	this->maxY = maxY;
 	SetSpriteNum(spriteNum);
 	SetPos(x, y);
 }
@@ -34,8 +36,10 @@ void Entity::SetSpriteNum(int spriteNum)
 }
 void Entity::SetPos(int x, int y)
 {
-	this->x = x;
-	this->y = y;
+	if (x >= 0 && x < maxX)
+		this->x = x;
+	if (y >= 0 && y < maxY)
+		this->y = y;
 }
 
 

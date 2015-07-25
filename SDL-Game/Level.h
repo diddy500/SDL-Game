@@ -25,8 +25,7 @@ public:
 	void SetTokenTile(int x, int y, int spriteNum);
 	int GetTokenTile(int x, int y);
 
-	void MoveToken();
-
 	void GenerateLevel();
+	void UpdateLevel();
 };
 

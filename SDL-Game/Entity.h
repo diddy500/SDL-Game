@@ -6,12 +6,13 @@ class Entity
 {
 protected:
 	int spriteNum;
-
+	int maxX;
+	int maxY;
 	int x;
 	int y;
 
 public:
-	Entity(int spriteNum, int x = 0, int y = 0);
+	Entity(int spriteNum, int maxX, int maxY, int x = 0, int y = 0);
 	~Entity();
 
 	int GetSpriteNum(void);

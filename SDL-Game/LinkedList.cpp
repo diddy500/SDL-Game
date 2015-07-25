@@ -21,7 +21,7 @@ int LinkedList::AddNode(Entity* ent)
 	}
 	else
 	{
-		Node* current = head;
+		current = head;
 		while (current->GetNext())
 		{
 			current = current->GetNext();
@@ -39,7 +39,7 @@ bool LinkedList::RemoveNode(int id)
 	{
 		return false;
 	}
-	Node* current = head;
+	current = head;
 
 	while (current->GetNext())
 	{
@@ -67,7 +67,7 @@ Entity* LinkedList::FindItem(int id)
 	{
 		return nullptr;
 	}
-	Node* current = head;
+	current = head;
 
 	while (current->GetNext())
 	{
@@ -85,5 +85,20 @@ Entity* LinkedList::FindItem(int id)
 		return nullptr;
 }
 
-
-
+Entity* LinkedList::GetHead()
+{
+	current = head;
+	return current->GetEntity();
+}
+Entity* LinkedList::GetNextItem()
+{
+	if (current->GetNext())
+	{
+		current = current->GetNext();
+		return current->GetEntity();
+	}
+	else
+	{
+		return nullptr;
+	}
+}

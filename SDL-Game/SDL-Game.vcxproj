@@ -16,6 +16,7 @@
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -26,6 +27,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Window.h" />
@@ -73,7 +75,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>C:\Libraries\SDL2-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

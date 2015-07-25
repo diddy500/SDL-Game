@@ -17,6 +17,8 @@ void Level::SetBackgroundTile(int x, int y, int spriteNum)
 }
 int Level::GetBackgroundTile(int x, int y)
 {
+	if (x < 0 || y < 0 || x >= NUM_COLS || y >= NUM_ROWS)
+		return 0;
 	return backgroundTiles[x + y * NUM_COLS];
 }
 
@@ -26,13 +28,11 @@ void Level::SetTokenTile(int x, int y, int spriteNum)
 }
 int Level::GetTokenTile(int x, int y)
 {
+	if (x < 0 || y < 0 || x >= NUM_COLS || y >= NUM_ROWS)
+		return 0;
 	return tokenTiles[x + y * NUM_COLS];
 }
 
-void Level::MoveToken()
-{
-
-}
 
 void Level::GenerateLevel()
 {
@@ -56,5 +56,25 @@ void Level::GenerateLevel()
 
 		tokenTiles.push_back(0);
 	}
+
+}
+
+void Level::UpdateLevel()
+{
+
+	for (int i = 0; i < NUM_ROWS; i++)
+	{
+		for (int j = 0; j < NUM_COLS; j++)
+		{
+			SetTokenTile(j, i, 0);
+		}
+	}
+	Entity* ent = tokenList.GetHead();
+	while (ent)
+	{
+		SetTokenTile(ent->GetX(), ent->GetY(), ent->GetSpriteNum());
+		ent = tokenList.GetNextItem();
+	}
+	
 
 }
