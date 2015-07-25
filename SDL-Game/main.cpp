@@ -8,7 +8,7 @@
 #include "Utilities.h"
 #include "Cleanup.h"
 #include "Window.h"
-#include "Cursor.h"
+
 
 
 int main(int argc, char *argv[])
@@ -22,7 +22,8 @@ int main(int argc, char *argv[])
 	}
 
 	Window win("Resources/curses_square_16x16.bmp", 640, 480, 16, 16);
-	Cursor cur(&win, 254, 10, 10);
+
+	
 
 	//gameLoop
 	const int TICKS_PER_SECOND = 50;
@@ -52,11 +53,11 @@ int main(int argc, char *argv[])
 					{
 						quit = true;
 					}
-					cur.Move(keynum);
+
 				}
 			}
 
-			cur.Update();
+
 
 			next_game_tick += SKIP_TICKS;
 			loops++;

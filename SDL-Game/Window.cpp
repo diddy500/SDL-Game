@@ -1,7 +1,7 @@
 #include "Window.h"
 
 
-Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int spriteH) : SCREEN_WIDTH(screenW), SCREEN_HEIGHT(screenH)
+Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int spriteH) : SCREEN_WIDTH(screenW), SCREEN_HEIGHT(screenH), lev(screenW, screenH)
 {
 	window = SDL_CreateWindow("Dorfs", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr)
@@ -20,12 +20,15 @@ Window::Window(std::string sheetPath, int screenW, int screenH, int spriteW, int
 
 	sheet = new SpriteSheet(sheetPath, renderer, spriteW, spriteH);
 
-	for (int i = 0; i < ((SCREEN_WIDTH / sheet->GetSpriteWidth()) * (SCREEN_HEIGHT / sheet->GetSpriteHeight())); i++)
-	{
-		screenTiles.push_back(0);
-		screenTilesBackground.push_back(0);
-	}
+	lev.GenerateLevel();
 
+	for (int i = 0; i < SCREEN_HEIGHT / sheet->GetSpriteHeight(); i++)
+	{
+		for (int j = 0; j < SCREEN_WIDTH / sheet->GetSpriteWidth(); j++)
+		{
+			screenTiles.push_back(lev.GetBackgroundTile(j, i));
+		}
+	}
 }
 
 
@@ -42,6 +45,18 @@ void Window::updateWindow()
 	int row = SCREEN_HEIGHT / sheet->GetSpriteHeight();
 
 	SDL_RenderClear(renderer);
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			if (lev.GetTokenTile(j, i) > 0)
+				screenTiles[j + i * col] = lev.GetTokenTile(j, i);
+			else
+				screenTiles[j + i * col] = lev.GetBackgroundTile(j, i);
+			
+		}
+	}
 
 	for (int i = 0; i < row; i++)
 	{
@@ -64,11 +79,3 @@ int Window::GetScreenTile(int x, int y)
 	return screenTiles[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()];
 }
 
-void Window::SetBackgroundTile(int x, int y, int spriteNum)
-{
-	screenTilesBackground[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()] = spriteNum;
-}
-int Window::GetBackgroundTile(int x, int y)
-{
-	return screenTilesBackground[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()];
-}

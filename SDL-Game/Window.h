@@ -5,6 +5,7 @@
 #include "Utilities.h"
 #include "Cleanup.h"
 #include "SpriteSheet.h"
+#include "Level.h"
 
 class Window
 {
@@ -14,8 +15,8 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SpriteSheet* sheet;
+	Level lev;
 	std::vector<int> screenTiles;
-	std::vector<int> screenTilesBackground;
 
 public:
 	Window(std::string sheetPath, int screenW, int screenH, int spriteW, int spriteH);
@@ -25,7 +26,5 @@ public:
 	void SetScreenTile(int x, int y, int spriteNum);
 	int GetScreenTile(int x, int y);
 
-	void SetBackgroundTile(int x, int y, int spriteNum);
-	int GetBackgroundTile(int x, int y);
 };
 
