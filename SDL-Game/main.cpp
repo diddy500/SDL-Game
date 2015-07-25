@@ -14,8 +14,8 @@
 int main(int argc, char *argv[])
 {
 	//config information
-	const int LEVEL_WIDTH = 60;
-	const int LEVEL_HEIGHT = 60;
+	const int LEVEL_WIDTH = 500;
+	const int LEVEL_HEIGHT = 500;
 	const int SCREEN_WIDTH = 640;
 	const int SCREEN_HEIGHT = 480;
 	const int SPRITE_WIDTH = 16;
