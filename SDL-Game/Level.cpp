@@ -3,7 +3,11 @@
 
 Level::Level(int width, int height) : NUM_COLS(width), NUM_ROWS(height)
 {
-	
+	GenerateLevel();
+
+	player = new Player(&tokenList, NUM_ROWS, NUM_COLS, 30, 30);
+
+	GenerateTokens();
 }
 
 
@@ -58,23 +62,45 @@ void Level::GenerateLevel()
 	}
 
 }
+void Level::GenerateTokens()
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> distCol(0, NUM_COLS);
+	std::uniform_int_distribution<int> distRow(0, NUM_ROWS);
+
+	for (int i = 0; i < 100; i++)
+		new NPC(&tokenList, 2, NUM_COLS, NUM_ROWS, distCol(mt), distRow(mt));
+
+
+}
 
 void Level::UpdateLevel()
 {
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dist(0, 3);
 
-	for (int i = 0; i < NUM_ROWS; i++)
+	if (!player->isPlayerTurn)
 	{
-		for (int j = 0; j < NUM_COLS; j++)
+		for (int i = 0; i < NUM_ROWS; i++)
 		{
-			SetTokenTile(j, i, 0);
+			for (int j = 0; j < NUM_COLS; j++)
+			{
+				SetTokenTile(j, i, 0);
+			}
 		}
-	}
-	Entity* ent = tokenList.GetHead();
-	while (ent)
-	{
-		SetTokenTile(ent->GetX(), ent->GetY(), ent->GetSpriteNum());
-		ent = tokenList.GetNextItem();
+
+		Entity* ent;
+		for (std::list<Entity*>::iterator i = tokenList.begin(); i != tokenList.end(); i++)
+		{
+			ent = *i;
+			if (dynamic_cast<NPC*> (ent))
+				ent->Move(dist(mt));
+			SetTokenTile(ent->GetX(), ent->GetY(), ent->GetSpriteNum());
+
+		}
+		player->isPlayerTurn = true;
 	}
 	
-
 }

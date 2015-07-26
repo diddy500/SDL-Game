@@ -14,10 +14,10 @@
 int main(int argc, char *argv[])
 {
 	//config information
-	const int LEVEL_WIDTH = 500;
-	const int LEVEL_HEIGHT = 500;
-	const int SCREEN_WIDTH = 640;
-	const int SCREEN_HEIGHT = 480;
+	const int LEVEL_WIDTH = 200;
+	const int LEVEL_HEIGHT = 200;
+	const int SCREEN_WIDTH = 1600;
+	const int SCREEN_HEIGHT = 900;
 	const int SPRITE_WIDTH = 16;
 	const int SPRITE_HEIGHT = 16;
 	const std::string SHEET_PATH = "Resources/curses_square_16x16.bmp";
@@ -49,16 +49,11 @@ int main(int argc, char *argv[])
 
 	Level* lev = new Level(LEVEL_WIDTH, LEVEL_HEIGHT);
 
-	lev->GenerateLevel();
-
-	Player* player = new Player(LEVEL_WIDTH, LEVEL_HEIGHT, 30, 30);
-
-	lev->tokenList.AddNode(player);
-
-	Window win(window, renderer, sheet, lev, player, SCREEN_WIDTH, SCREEN_HEIGHT);
-
 	
 
+	Window win(window, renderer, sheet, lev, lev->player, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	
 	//gameLoop
 	const int TICKS_PER_SECOND = 50;
 	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
@@ -78,7 +73,7 @@ int main(int argc, char *argv[])
 			while (SDL_PollEvent(&e)){
 				if (e.type == SDL_QUIT)
 					quit = true;
-				//Use number input to select which clip should be drawn
+				//User Input
 				if (e.type == SDL_KEYDOWN){
 
 					int keynum = e.key.keysym.sym;
@@ -87,12 +82,10 @@ int main(int argc, char *argv[])
 					{
 						quit = true;
 					}
-					player->Move(e.key.keysym.sym);
+					lev->player->Move(e.key.keysym.sym);
 
 				}
 			}
-
-
 
 			next_game_tick += SKIP_TICKS;
 			loops++;

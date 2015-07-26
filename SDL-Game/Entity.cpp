@@ -1,17 +1,19 @@
 #include "Entity.h"
 
 
-Entity::Entity(int spriteNum, int maxX, int maxY, int x, int y)
+Entity::Entity(std::list<Entity*>* list, int spriteNum, int maxX, int maxY, int x, int y)
 {
 	this->maxX = maxX;
 	this->maxY = maxY;
 	SetSpriteNum(spriteNum);
 	SetPos(x, y);
+	list->push_back(this);
 }
 
 
 Entity::~Entity()
 {
+	list->remove(this);
 }
 
 

@@ -4,8 +4,10 @@ class Player :
 	public Entity
 {
 public:
-	Player(int maxX, int maxY, int x, int y);
+	Player(std::list<Entity*>* list, int maxX, int maxY, int x, int y);
 	~Player();
+
+	bool isPlayerTurn;
 
 	void Move(int keynum);
 };

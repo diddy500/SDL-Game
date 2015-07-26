@@ -13,9 +13,9 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Utilities.cpp" />
@@ -25,8 +25,8 @@
     <ClInclude Include="Cleanup.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Utilities.h" />

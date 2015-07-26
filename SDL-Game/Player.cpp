@@ -1,8 +1,9 @@
 #include "Player.h"
 
 
-Player::Player(int maxX, int maxY, int x, int y) : Entity(2, maxX, maxY, x, y)
+Player::Player(std::list<Entity*>* list, int maxX, int maxY, int x, int y) : Entity(list, 1, maxX, maxY, x, y)
 {
+	isPlayerTurn = true;
 }
 
 
@@ -27,7 +28,9 @@ void Player::Move(int keynum)
 	case SDLK_DOWN:
 		SetPos(GetX(), GetY() + 1);
 		break;
-	default:
+	case SDLK_PERIOD:
 		break;
 	}
+
+	isPlayerTurn = false;
 }
