@@ -1,11 +1,11 @@
 #include "Level.h"
-
+#include "TileLoader.h"
 
 Level::Level(int width, int height) : NUM_COLS(width), NUM_ROWS(height)
 {
 	GenerateLevel();
 
-	player = new Player(&tokenList, NUM_ROWS, NUM_COLS, 30, 30);
+	player = new Player(this, NUM_ROWS, NUM_COLS, 30, 30);
 
 	GenerateTokens();
 }
@@ -15,14 +15,15 @@ Level::~Level()
 {
 }
 
-void Level::SetBackgroundTile(int x, int y, int spriteNum)
+void Level::SetBackgroundTile(int x, int y, Tile* tile)
 {
-	backgroundTiles[x + y * NUM_COLS] = spriteNum;
+	delete backgroundTiles[x + y * NUM_COLS];
+	backgroundTiles[x + y * NUM_COLS] = tile;
 }
-int Level::GetBackgroundTile(int x, int y)
+Tile* Level::GetBackgroundTile(int x, int y)
 {
 	if (x < 0 || y < 0 || x >= NUM_COLS || y >= NUM_ROWS)
-		return 0;
+		return NULL;
 	return backgroundTiles[x + y * NUM_COLS];
 }
 
@@ -40,24 +41,13 @@ int Level::GetTokenTile(int x, int y)
 
 void Level::GenerateLevel()
 {
-	std::random_device rd;
-	std::mt19937 mt(rd());
-	std::uniform_int_distribution<int> dist(0, 5);
+	TileLoader loader;
+	loader.SetID("floor");
+
 	for (int i = 0; i < NUM_COLS * NUM_ROWS; i++)
 	{
-		int num = dist(mt);
 
-		if (num <= 3)
-			backgroundTiles.push_back(0);
-		else if (num == 4)
-		{
-			backgroundTiles.push_back(249);
-		}
-		else if (num == 5)
-		{
-			backgroundTiles.push_back(250);
-		}
-
+		backgroundTiles.push_back(new Tile(loader.GetID(),loader.spriteNums,loader.isWalkable));
 		tokenTiles.push_back(0);
 	}
 
@@ -70,7 +60,7 @@ void Level::GenerateTokens()
 	std::uniform_int_distribution<int> distRow(0, NUM_ROWS);
 
 	for (int i = 0; i < 100; i++)
-		new NPC(&tokenList, 2, NUM_COLS, NUM_ROWS, distCol(mt), distRow(mt));
+		new NPC(this, 2, NUM_COLS, NUM_ROWS, distCol(mt), distRow(mt));
 
 
 }

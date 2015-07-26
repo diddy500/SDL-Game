@@ -13,7 +13,7 @@ Window::Window(SDL_Window* window, SDL_Renderer* renderer, SpriteSheet* sheet, L
 	{
 		for (int j = 0; j < SCREEN_WIDTH / sheet->GetSpriteWidth(); j++)
 		{
-			screenTiles.push_back(lev->GetBackgroundTile(j, i));
+			screenTiles.push_back(lev->GetBackgroundTile(j, i)->spriteNum);
 		}
 	}
 }
@@ -36,7 +36,6 @@ void Window::updateWindow()
 
 	SDL_RenderClear(renderer);
 	
-	lev->UpdateLevel();
 
 	for (int i = 0; i < row; i++)
 	{
@@ -46,7 +45,12 @@ void Window::updateWindow()
 			if (lev->GetTokenTile(j + offsetX, i + offsetY) > 0)
 				screenTiles[j + i * col] = lev->GetTokenTile(j + offsetX, i + offsetY);
 			else
-				screenTiles[j + i * col] = lev->GetBackgroundTile(j + offsetX, i + offsetY);
+			{
+				if (lev->GetBackgroundTile(j + offsetX, i + offsetY) == NULL)
+					screenTiles[j + i * col] = 0;
+				else
+					screenTiles[j + i * col] = lev->GetBackgroundTile(j + offsetX, i + offsetY)->spriteNum;
+			}
 			
 		}
 	}
@@ -55,7 +59,7 @@ void Window::updateWindow()
 	{
 		for (int j = 0; j < col; j++)
 		{
-
+			
 			sheet->renderTexture(j * sheet->GetSpriteWidth(), i * sheet->GetSpriteHeight(), screenTiles[j + i * col]);
 		}
 	}

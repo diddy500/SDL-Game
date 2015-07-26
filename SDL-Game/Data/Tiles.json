@@ -1,0 +1,14 @@
+[
+    {
+        "id": "floor",
+        "sprite": [ 0, 249, 250 ],
+        "isWalkable": true
+    },
+
+    {
+        "id": "smoothFloor",
+        "sprite": 43,
+        "colour": [255,0,255],
+        "isWalkable": true
+    }
+]

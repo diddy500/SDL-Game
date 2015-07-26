@@ -9,18 +9,20 @@
 #include "Cleanup.h"
 #include "Window.h"
 #include "Player.h"
-
+#include "Tile.h"
 
 int main(int argc, char *argv[])
 {
-	//config information
-	const int LEVEL_WIDTH = 200;
-	const int LEVEL_HEIGHT = 200;
-	const int SCREEN_WIDTH = 1600;
-	const int SCREEN_HEIGHT = 900;
-	const int SPRITE_WIDTH = 16;
-	const int SPRITE_HEIGHT = 16;
-	const std::string SHEET_PATH = "Resources/curses_square_16x16.bmp";
+	//getting config information
+	TCHAR tempPath[255];
+	GetPrivateProfileString("video", "sprite_sheet", "Resources/curses_square_16x16.bmp", tempPath, 255, "Config/config.ini");
+	const int LEVEL_WIDTH = GetPrivateProfileInt("level", "width", 500, "Config/config.ini");
+	const int LEVEL_HEIGHT = GetPrivateProfileInt("level", "height", 500, "Config/config.ini");
+	const int SCREEN_WIDTH = GetPrivateProfileInt("video", "res_x", 500, "Config/config.ini");
+	const int SCREEN_HEIGHT = GetPrivateProfileInt("video", "res_y", 500, "Config/config.ini");
+	const int SPRITE_WIDTH = GetPrivateProfileInt("video", "sprite_width", 500, "Config/config.ini");
+	const int SPRITE_HEIGHT = GetPrivateProfileInt("video", "sprite_height", 500, "Config/config.ini");
+	const std::string SHEET_PATH = tempPath;
 
 
 	//Init
@@ -49,8 +51,6 @@ int main(int argc, char *argv[])
 
 	Level* lev = new Level(LEVEL_WIDTH, LEVEL_HEIGHT);
 
-	
-
 	Window win(window, renderer, sheet, lev, lev->player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
 	const int MAX_FRAMESKIP = 10;
 
-	DWORD next_game_tick = GetTickCount();
+	ULONGLONG next_game_tick = GetTickCount64();
 	int loops;
 
 	SDL_Event e;
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 	while (!quit)
 	{
 		loops = 0;
-		while (GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP)
+		while (GetTickCount64() > next_game_tick && loops < MAX_FRAMESKIP)
 		{
 			while (SDL_PollEvent(&e)){
 				if (e.type == SDL_QUIT)
@@ -87,10 +87,13 @@ int main(int argc, char *argv[])
 				}
 			}
 
+			lev->UpdateLevel();
+
 			next_game_tick += SKIP_TICKS;
 			loops++;
 		}
 
+		
 		win.updateWindow();
 
 	}

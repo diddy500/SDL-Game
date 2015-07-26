@@ -1,19 +1,20 @@
 #include "Entity.h"
+#include "Level.h"
 
-
-Entity::Entity(std::list<Entity*>* list, int spriteNum, int maxX, int maxY, int x, int y)
+Entity::Entity(Level* lev, int spriteNum, int maxX, int maxY, int x, int y)
 {
 	this->maxX = maxX;
 	this->maxY = maxY;
+	this->lev = lev;
 	SetSpriteNum(spriteNum);
 	SetPos(x, y);
-	list->push_back(this);
+	lev->tokenList.push_back(this);
 }
 
 
 Entity::~Entity()
 {
-	list->remove(this);
+	lev->tokenList.remove(this);
 }
 
 

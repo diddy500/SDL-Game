@@ -4,7 +4,7 @@ class Player :
 	public Entity
 {
 public:
-	Player(std::list<Entity*>* list, int maxX, int maxY, int x, int y);
+	Player(Level* lev, int maxX, int maxY, int x, int y);
 	~Player();
 
 	bool isPlayerTurn;

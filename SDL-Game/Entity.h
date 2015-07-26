@@ -2,7 +2,9 @@
 
 #include <SDL.h>
 #include <list>
-
+#include <vector>
+#include "Tile.h"
+class Level;
 class Entity
 {
 protected:
@@ -11,10 +13,9 @@ protected:
 	int maxY;
 	int x;
 	int y;
-	std::list<Entity*>* list;
-
+	Level* lev;
 public:
-	Entity(std::list<Entity*>* list, int spriteNum, int maxX, int maxY, int x, int y);
+	Entity(Level* lev, int spriteNum, int maxX, int maxY, int x, int y);
 	~Entity();
 
 	int GetSpriteNum(void);

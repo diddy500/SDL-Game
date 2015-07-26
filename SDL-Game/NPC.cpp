@@ -1,7 +1,7 @@
 #include "NPC.h"
+#include "Level.h"
 
-
-NPC::NPC(std::list<Entity*>* list, int spriteNum, int maxX, int maxY, int x, int y) : Entity(list, spriteNum, maxX, maxY, x, y)
+NPC::NPC(Level* lev, int spriteNum, int maxX, int maxY, int x, int y) : Entity(lev, spriteNum, maxX, maxY, x, y)
 {
 }
 

@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "NPC.h"
+#include "Tile.h"
 
 class Level
 {
@@ -12,9 +13,7 @@ private:
 	const int NUM_ROWS;
 	const int NUM_COLS;
 
-	
-	
-	std::vector<int> backgroundTiles;
+	std::vector<Tile*> backgroundTiles;
 	std::vector<int> tokenTiles;
 	
 public:
@@ -24,8 +23,8 @@ public:
 	Player* player;
 	std::list<Entity*> tokenList;
 
-	void SetBackgroundTile(int x, int y, int spriteNum);
-	int GetBackgroundTile(int x, int y);
+	void SetBackgroundTile(int x, int y, Tile* tile);
+	Tile* GetBackgroundTile(int x, int y);
 
 	void SetTokenTile(int x, int y, int spriteNum);
 	int GetTokenTile(int x, int y);

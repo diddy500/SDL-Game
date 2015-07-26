@@ -94,6 +94,7 @@ void SpriteSheet::loadSpriteSheet()
 
 void SpriteSheet::renderTexture(SDL_Rect dst, int useClip)
 {
+	SDL_SetTextureColorMod(texture, 0x00, 0xFF, 0xFF);
 	SDL_RenderCopy(ren, texture, &clips[useClip], &dst);
 }
 void SpriteSheet::renderTexture(int x, int y, int useClip)
