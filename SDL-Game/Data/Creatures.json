@@ -1,0 +1,22 @@
+[
+    {
+        "id": "goblin",
+        "sprite": 103,
+        "colour": [ 0, 255, 0 ],
+        "isWalkable": false
+    },
+
+    {
+        "id": "orc",
+        "sprite": 79,
+        "colour": [ 255, 100, 100 ],
+        "isWalkable": false
+    },
+
+    {
+        "id": "duck",
+        "sprite": 100,
+        "colour": [ 0, 150, 0 ],
+        "isWalkable": false
+    } 
+]

@@ -13,7 +13,7 @@ Window::Window(SDL_Window* window, SDL_Renderer* renderer, SpriteSheet* sheet, L
 	{
 		for (int j = 0; j < SCREEN_WIDTH / sheet->GetSpriteWidth(); j++)
 		{
-			screenTiles.push_back(lev->GetBackgroundTile(j, i)->spriteNum);
+			screenTiles.push_back(lev->GetBackgroundTile(j, i));
 		}
 	}
 }
@@ -42,36 +42,45 @@ void Window::updateWindow()
 		for (int j = 0; j < col; j++)
 		{
 			
-			if (lev->GetTokenTile(j + offsetX, i + offsetY) > 0)
+			if (lev->GetTokenTile(j + offsetX, i + offsetY) && lev->GetTokenTile(j + offsetX, i + offsetY)->isVisible)
 				screenTiles[j + i * col] = lev->GetTokenTile(j + offsetX, i + offsetY);
 			else
 			{
-				if (lev->GetBackgroundTile(j + offsetX, i + offsetY) == NULL)
-					screenTiles[j + i * col] = 0;
-				else
-					screenTiles[j + i * col] = lev->GetBackgroundTile(j + offsetX, i + offsetY)->spriteNum;
+					screenTiles[j + i * col] = lev->GetBackgroundTile(j + offsetX, i + offsetY);
 			}
 			
 		}
 	}
 
+	int sprite;
+	int colourMod;
 	for (int i = 0; i < row; i++)
 	{
 		for (int j = 0; j < col; j++)
 		{
 			
-			sheet->renderTexture(j * sheet->GetSpriteWidth(), i * sheet->GetSpriteHeight(), screenTiles[j + i * col]);
+			if (screenTiles[j + i * col] && screenTiles[j + i * col]->isVisible)
+			{
+				sprite = screenTiles[j + i * col]->spriteNum;
+				colourMod = screenTiles[j + i * col]->colourMod;
+			}
+			else
+			{
+				sprite = 0;
+				colourMod = NULL;
+			}
+			sheet->renderTexture(j * sheet->GetSpriteWidth(), i * sheet->GetSpriteHeight(), sprite, colourMod);
 		}
 	}
 	
 	SDL_RenderPresent(renderer);
 }
 
-void Window::SetScreenTile(int x, int y, int spriteNum)
+void Window::SetScreenTile(int x, int y, Tile* tile)
 {
-	screenTiles[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()] = spriteNum;
+	screenTiles[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()] = tile;
 }
-int Window::GetScreenTile(int x, int y)
+Tile* Window::GetScreenTile(int x, int y)
 {
 	return screenTiles[x + y * SCREEN_WIDTH / sheet->GetSpriteWidth()];
 }

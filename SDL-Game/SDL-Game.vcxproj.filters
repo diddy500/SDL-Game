@@ -19,19 +19,19 @@
     <Filter Include="Data">
       <UniqueIdentifier>{b05a5c24-b476-4203-b340-1eb052ffb074}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Diagrams">
+      <UniqueIdentifier>{8e5c6d96-9069-404b-bf00-16a13d3a6247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{f2a73842-7bd0-4785-a06f-c8a41cd7f249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FOV">
+      <UniqueIdentifier>{f547c2d8-038b-45cc-af11-388c3055c31c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>JSON</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
@@ -39,23 +39,32 @@
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="jsoncpp.cpp">
-      <Filter>JSON</Filter>
-    </ClCompile>
     <ClCompile Include="TileLoader.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fov.cpp">
+      <Filter>FOV</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +86,6 @@
     <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -98,10 +104,25 @@
     <ClInclude Include="TileLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fov.h">
+      <Filter>FOV</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Tiles.json">
       <Filter>Data</Filter>
+    </None>
+    <None Include="Complete Project.cd">
+      <Filter>Diagrams</Filter>
+    </None>
+    <None Include="Data\Creatures.json">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="Data\PlayerStarts.json">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="Config\config.ini">
+      <Filter>Config</Filter>
     </None>
   </ItemGroup>
 </Project>

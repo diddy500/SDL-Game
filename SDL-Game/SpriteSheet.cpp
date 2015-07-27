@@ -51,7 +51,6 @@ int SpriteSheet::GetSpriteHeight(void)
 	return sH;
 }
 
-
 SDL_Texture* SpriteSheet::loadTexture(const std::string &file)
 {
 	SDL_Texture *texture = nullptr;
@@ -92,12 +91,21 @@ void SpriteSheet::loadSpriteSheet()
 }
 
 
-void SpriteSheet::renderTexture(SDL_Rect dst, int useClip)
+void SpriteSheet::renderTexture(SDL_Rect dst, int useClip, int colourMod)
 {
-	SDL_SetTextureColorMod(texture, 0x00, 0xFF, 0xFF);
+	Uint32 number;
+	if (colourMod == NULL)
+		number = 0xFFFFFF;
+	else
+		number = colourMod;
+
+	Uint8 b = number & 0xFF;
+	Uint8 g = (number >> 8) & 0xFF;
+	Uint8 r = (number >> 16) & 0xFF;
+	SDL_SetTextureColorMod(texture, r, g, b);
 	SDL_RenderCopy(ren, texture, &clips[useClip], &dst);
 }
-void SpriteSheet::renderTexture(int x, int y, int useClip)
+void SpriteSheet::renderTexture(int x, int y, int useClip, int colourMod)
 {
 	SDL_Rect dst;
 	dst.x = x;
@@ -105,5 +113,5 @@ void SpriteSheet::renderTexture(int x, int y, int useClip)
 	dst.w = sW;
 	dst.h = sH;
 
-	renderTexture(dst, useClip);
+	renderTexture(dst, useClip, colourMod);
 }

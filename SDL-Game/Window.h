@@ -6,6 +6,7 @@
 #include "Cleanup.h"
 #include "SpriteSheet.h"
 #include "Level.h"
+#include "Tile.h"
 
 class Window
 {
@@ -17,15 +18,15 @@ private:
 	SpriteSheet* sheet;
 	Level* lev;
 	Entity* entCamFollows;
-	std::vector<int> screenTiles;
+	std::vector<Tile*> screenTiles;
 
 public:
 	Window(SDL_Window* window, SDL_Renderer* renderer, SpriteSheet* sheet, Level* lev,Entity* camFollow, int screenW, int screenH);
 	~Window();
 
 	void updateWindow();
-	void SetScreenTile(int x, int y, int spriteNum);
-	int GetScreenTile(int x, int y);
+	void SetScreenTile(int x, int y, Tile* tile);
+	Tile* GetScreenTile(int x, int y);
 
 };
 

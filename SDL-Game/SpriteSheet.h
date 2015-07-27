@@ -27,7 +27,7 @@ public:
 	SDL_Texture* loadTexture(const std::string &file);
 	void loadSpriteSheet();
 
-	void renderTexture(SDL_Rect dst, int useClip);
-	void renderTexture(int x, int y, int useClip);
+	void renderTexture(SDL_Rect dst, int useClip, int colourMod = 0xFFFFFF);
+	void renderTexture(int x, int y, int useClip, int colourMod = 0xFFFFFF);
 };
 

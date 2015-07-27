@@ -11,10 +11,12 @@ private:
 	
 
 public:
-	Tile(std::string id, std::vector<int> spriteNums, bool isWalkable);
+	Tile(std::string id, int spriteNum, int colourMod, bool isWalkable);
 	~Tile();
 
 	std::string id;
 	int spriteNum;
+	int colourMod;
 	bool isWalkable;
+	bool isVisible = false;
 };
