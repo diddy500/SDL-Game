@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include "Level.h"
 
-Entity::Entity(std::string id, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y) : Tile(id, spriteNum, colourMod, isWalkable)
+Entity::Entity(std::string id, std::string type, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y) : Tile(id, type, spriteNum, colourMod, isWalkable)
 {
 	this->maxX = maxX;
 	this->maxY = maxY;

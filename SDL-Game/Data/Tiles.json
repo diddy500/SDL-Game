@@ -1,21 +1,36 @@
 [
     {
-        "id": "floor",
-        "sprite": [ 0, 249, 250 ],
-        "colour": [ 100, 100, 100 ],
-        "isWalkable": true
+        "type": "floor",
+        "subtypes": [
+            {
+                "id": "floor",
+                "sprite": [ 0, 249, 250 ],
+                "colour": [ 100, 100, 100 ],
+                "isWalkable": true
+            },
+
+            {
+                "id": "smoothFloor",
+                "sprite": 43,
+
+                "isWalkable": true
+            }
+        ]
+
     },
 
     {
-        "id": "smoothFloor",
-        "sprite": 43,
+        "type": "wall",
+        "subtypes": [
+            {
 
-        "isWalkable": true
-    },
+                "id": "wall",
+                "sprite": 219,
+                "isWalkable": false
 
-    {
-        "id": "wall",
-        "sprite": 219,
-        "isWalkable": false
+            }
+        ]
     }
+
+
 ]

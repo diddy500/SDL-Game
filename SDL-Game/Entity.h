@@ -14,7 +14,7 @@ protected:
 	int y;
 	Level* lev;
 public:
-	Entity(std::string id, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y);
+	Entity(std::string id, std::string type, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y);
 	~Entity();
 
 	int GetX(void);

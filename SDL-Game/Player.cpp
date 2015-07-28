@@ -5,7 +5,7 @@
 #include "Level.h"
 #include "fov.h"
 
-Player::Player(std::string id, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y) : Entity(id, spriteNum, colourMod, isWalkable, lev, maxX, maxY, x, y)
+Player::Player(std::string id, std::string type, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y) : Entity(id, type, spriteNum, colourMod, isWalkable, lev, maxX, maxY, x, y)
 {
 	isPlayerTurn = false;
 	isVisible = true;
@@ -73,7 +73,10 @@ void Player::CheckVision()
 void Player::SeeTile(short x, short y)
 {
 	if (lev->GetBackgroundTile(x, y))
+	{
 		lev->GetBackgroundTile(x, y)->isVisible = true;
+		lev->GetBackgroundTile(x, y)->isMemorized = true;
+	}
 	if (lev->GetTokenTile(x, y))
 		lev->GetTokenTile(x, y)->isVisible = true;
 }

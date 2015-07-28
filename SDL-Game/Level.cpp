@@ -1,14 +1,48 @@
 #include "Level.h"
 #include "TileLoader.h"
+#include <iostream>
 
-Level::Level(int width, int height) : NUM_COLS(width), NUM_ROWS(height)
+namespace
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+
+	int randomInt(int ExclusiveMax)
+	{
+		std::uniform_int_distribution<> dist(0, ExclusiveMax - 1);
+		return dist(mt);
+	}
+
+	int randomInt(int min, int max)
+	{
+		std::uniform_int_distribution<> dist(min, max);
+		return dist(mt);
+	}
+
+	bool randomBool(double prob = 0.5)
+	{
+		std::bernoulli_distribution dist(prob);
+		return dist(mt);
+	}
+}
+
+enum Direction
+{
+	North,
+	South,
+	West,
+	East,
+	DirectionCount
+};
+
+Level::Level(int width, int height) : NUM_COLS(width), NUM_ROWS(height), backgroundTiles(width * height), tokenTiles(width * height)
 {
 	GenerateLevel();
 
 	TileLoader loader;
-	loader.SetID("playerStarts", "human");
+	loader.SetID("playerStarts", "nobel");
 	GenerateTokens();
-	player = new Player(loader.GetID(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable(), this, NUM_ROWS, NUM_COLS, 1, 1);
+	player = new Player(loader.GetID(), loader.GetType(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable(), this, NUM_ROWS, NUM_COLS, rooms[0].x, rooms[0].y);
 }
 
 
@@ -16,14 +50,9 @@ Level::~Level()
 {
 }
 
-bool Level::IsBlocked(short x, short y, void*)
-{
-	return GetBackgroundTile(x, y)->isWalkable;
-}
 
 void Level::SetBackgroundTile(int x, int y, Tile* tile)
 {
-	delete backgroundTiles[x + y * NUM_COLS];
 	backgroundTiles[x + y * NUM_COLS] = tile;
 }
 Tile* Level::GetBackgroundTile(int x, int y)
@@ -54,52 +83,36 @@ Tile* Level::GetTile(int x, int y)
 
 void Level::GenerateLevel()
 {
-	std::random_device rd;
-	std::mt19937 mt(rd());
-
-
-	TileLoader loader;
-	std::vector<TileLoader*> tiles = loader.GetAllOfType("tiles");;
-
-	std::uniform_int_distribution<int> dist(0, tiles.size() - 1);
-
-	int num;
-	for (int i = 0; i < NUM_COLS * NUM_ROWS; i++)
-	{
-		num = dist(mt);
-		backgroundTiles.push_back(new Tile(tiles[num]->GetID(), tiles[num]->GetSpriteNum(),tiles[num]->GetColourMod(), tiles[num]->GetIsWalkable()));
-		tokenTiles.push_back(0);
-	}
-
+	generate(200);
 }
+
 void Level::GenerateTokens()
 {
-	std::random_device rd;
-	std::mt19937 mt(rd());
-	std::uniform_int_distribution<int> distCol(0, NUM_COLS - 1);
-	std::uniform_int_distribution<int> distRow(0, NUM_ROWS - 1);
-
-	
 	TileLoader loader;
-	std::vector<TileLoader*> creatures = loader.GetAllOfType("creatures");;
+	std::vector<TileLoader*> creatures = loader.GetAllOfFile("creatures");;
 
-	std::uniform_int_distribution<int> dist(0, creatures.size() - 1);
-
+	int numCreatures = rooms.size() * 2;
+	
+	int loop;
 	int num;
+	int roomNum;
 	int x;
 	int y;
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < numCreatures; i++)
 	{
-		num = dist(mt);
-		x = distCol(mt);
-		y = distRow(mt);
-		while (!(GetBackgroundTile(x, y)->isWalkable))
+		num = randomInt(creatures.size());
+		roomNum = randomInt(rooms.size());
+		x = randomInt(rooms[roomNum].x, rooms[roomNum].x + rooms[roomNum].width);
+		y = randomInt(rooms[roomNum].y, rooms[roomNum].y + rooms[roomNum].height);
+		loop = 0;
+		while (!GetBackgroundTile(x, y) || !(GetBackgroundTile(x, y)->isWalkable) && loop < 100)
 		{
-			x = distCol(mt);
-			y = distRow(mt);
+			x = randomInt(rooms[roomNum].x, rooms[roomNum].x + rooms[roomNum].width);
+			y = randomInt(rooms[roomNum].y, rooms[roomNum].y + rooms[roomNum].height);
+			loop++;
 		}
-		new NPC(creatures[num]->GetID(), creatures[num]->GetSpriteNum(), creatures[num]->GetColourMod(), creatures[num]->GetIsWalkable(), this, NUM_COLS, NUM_ROWS, x, y);
+		new NPC(creatures[num]->GetID(), creatures[num]->GetType(), creatures[num]->GetSpriteNum(), creatures[num]->GetColourMod(), creatures[num]->GetIsWalkable(), this, NUM_COLS, NUM_ROWS, x, y);
 	}
 		
 
@@ -114,7 +127,10 @@ void Level::UpdateLevel()
 
 	if (!player->isPlayerTurn)
 	{
-
+		for (Tile* tile: backgroundTiles)
+		{
+			tile->isVisible = false;
+		}
 		for (std::list<Entity*>::iterator i = tokenList.begin(); i != tokenList.end(); i++)
 		{
 			
@@ -130,3 +146,292 @@ void Level::UpdateLevel()
 	}
 	
 }
+
+//New generation functions
+
+
+
+bool Level::createFeature()
+{
+	for (int i = 0; i < 1000; i++)
+	{
+		if (exits.empty())
+			break;
+
+		//picking random side of random room/corridor
+		int r = randomInt(exits.size());
+		int x = randomInt(exits[r].x, exits[r].x + exits[r].width - 1);
+		int y = randomInt(exits[r].y, exits[r].y + exits[r].height - 1);
+
+		//north, south, west, east
+		for (int j = 0; j < DirectionCount; j++)
+		{
+			if (createFeature(x, y, static_cast<Direction>(j)))
+			{
+				exits.erase(exits.begin() + r);
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+bool Level::createFeature(int x, int y, Direction dir)
+{
+	static const int roomChance = 50;
+
+	int dx = 0;
+	int dy = 0;
+
+	if (dir == North)
+		dy = 1;
+	else if (dir == South)
+		dy = -1;
+	else if (dir == West)
+		dx = 1;
+	else if (dir == East)
+		dx = -1;
+
+	if (!GetBackgroundTile(x + dx, y + dy) || GetBackgroundTile(x + dx, y + dy)->type != "floor")
+		return false;
+	if (randomInt(100) < roomChance)
+	{
+		if (makeRoom(x, y, dir))
+		{
+			//change to door instead of floor
+			loader.SetID("Tiles", "smoothFloor");
+			SetBackgroundTile(x, y, new Tile(loader.GetID(), loader.GetType(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable()));
+
+			return true;
+		}
+	}
+
+	else
+	{
+		if (makeCorridor(x, y, dir))
+		{
+			if (GetBackgroundTile(x + dx, y + dy)->type == "floor")
+			{
+				//change to door instead of floor
+				loader.SetID("Tiles", "smoothFloor");
+				SetBackgroundTile(x, y, new Tile(loader.GetID(), loader.GetType(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable()));
+
+				return true;
+			}
+			else
+			{
+				loader.SetID("Tiles", "smoothFloor");
+				SetBackgroundTile(x, y, new Tile(loader.GetID(), loader.GetType(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable()));
+			}
+
+			return true;
+		}
+	}
+
+	return false;
+}
+bool Level::makeRoom(int x, int y, Direction dir, bool firstRoom)
+{
+	static const int minRoomSize = 3;
+	static const int maxRoomSize = 6;
+	Rect room;
+	room.width = randomInt(minRoomSize, maxRoomSize);
+	room.height = randomInt(minRoomSize, maxRoomSize);
+
+	if (dir == North)
+	{
+		room.x = x - room.width / 2;
+		room.y = y - room.height;
+	}
+	else if (dir == South)
+	{
+		room.x = x - room.width / 2;
+		room.y = y + 1;
+	}
+	else if (dir == West)
+	{
+		room.x = x - room.width;
+		room.y = y - room.height / 2;
+	}
+	else if (dir == East)
+	{
+		room.x = x + 1;
+		room.y = y - room.height / 2;
+	}
+
+	if (placeRect(room, "smoothFloor"))
+	{
+		rooms.emplace_back(room);
+
+		if (dir != South || firstRoom) // north side
+			exits.emplace_back(Rect{ room.x, room.y - 1, room.width, 1 });
+		if (dir != North || firstRoom) // south side
+			exits.emplace_back(Rect{ room.x, room.y + room.height, room.width, 1 });
+		if (dir != East || firstRoom) // west side
+			exits.emplace_back(Rect{ room.x - 1, room.y, 1, room.height });
+		if (dir != West || firstRoom) // east side
+			exits.emplace_back(Rect{ room.x + room.width, room.y, 1, room.height });
+
+		return true;
+	}
+
+	return false;
+}
+bool Level::makeCorridor(int x, int y, Direction dir)
+{
+	static const int minCorridorLength = 3;
+	static const int maxCorridorLength = 6;
+
+	Rect corridor;
+	corridor.x = x;
+	corridor.y = y;
+
+	if (randomBool()) // horizontal corridor
+	{
+		corridor.width = randomInt(minCorridorLength, maxCorridorLength);
+		corridor.height = 1;
+
+		if (dir == North)
+		{
+			corridor.y = y - 1;
+
+			if (randomBool()) // west
+				corridor.x = x - corridor.width + 1;
+		}
+
+		else if (dir == South)
+		{
+			corridor.y = y + 1;
+
+			if (randomBool()) // west
+				corridor.x = x - corridor.width + 1;
+		}
+
+		else if (dir == West)
+			corridor.x = x - corridor.width;
+
+		else if (dir == East)
+			corridor.x = x + 1;
+	}
+
+	else // vertical corridor
+	{
+		corridor.width = 1;
+		corridor.height = randomInt(minCorridorLength, maxCorridorLength);
+
+		if (dir == North)
+			corridor.y = y - corridor.height;
+
+		else if (dir == South)
+			corridor.y = y + 1;
+
+		else if (dir == West)
+		{
+			corridor.x = x - 1;
+
+			if (randomBool()) // north
+				corridor.y = y - corridor.height + 1;
+		}
+
+		else if (dir == East)
+		{
+			corridor.x = x + 1;
+
+			if (randomBool()) // north
+				corridor.y = y - corridor.height + 1;
+		}
+	}
+
+	if (placeRect(corridor, "smoothFloor"))
+	{
+		if (dir != South && corridor.width != 1) // north side
+			exits.emplace_back(Rect{ corridor.x, corridor.y - 1, corridor.width, 1 });
+		if (dir != North && corridor.width != 1) // south side
+			exits.emplace_back(Rect{ corridor.x, corridor.y + corridor.height, corridor.width, 1 });
+		if (dir != East && corridor.height != 1) // west side
+			exits.emplace_back(Rect{ corridor.x - 1, corridor.y, 1, corridor.height });
+		if (dir != West && corridor.height != 1) // east side
+			exits.emplace_back(Rect{ corridor.x + corridor.width, corridor.y, 1, corridor.height });
+
+		return true;
+	}
+
+	return false;
+}
+bool Level::placeRect(const Rect& rect, std::string id)
+{
+	TileLoader wall;
+	TileLoader tile;
+	wall.SetID("tiles", "wall");
+	tile.SetID("tiles", id);
+
+	if (rect.x < 1 || rect.y < 1 || rect.x + rect.width >= NUM_COLS - 1 || rect.y + rect.height >= NUM_ROWS - 1)
+		return false;
+
+	for (int y = rect.y; y < rect.y + rect.height; ++y)
+	{
+		for (int x = rect.x; x < rect.x + rect.width; ++x)
+		{
+			if (GetBackgroundTile(x, y) != nullptr)
+				return false; // the area already used
+		}
+	}
+
+	for (int y = rect.y - 1; y < rect.y + rect.height + 1; ++y)
+	{
+		for (int x = rect.x - 1; x < rect.x + rect.width + 1; ++x)
+		{
+			if (x == rect.x - 1 || y == rect.y - 1 || x == rect.x + rect.width || y == rect.y + rect.height)
+				SetBackgroundTile(x, y, new Tile(wall.GetID(), wall.GetType(), wall.GetSpriteNum(), wall.GetColourMod(), wall.GetIsWalkable()));
+			else
+				SetBackgroundTile(x, y, new Tile(tile.GetID(), tile.GetType(), tile.GetSpriteNum(), tile.GetColourMod(), tile.GetIsWalkable()));
+		}
+	}
+
+	return true;
+}
+bool Level::placeObject(std::string id)
+{
+	return false;
+}
+
+void Level::generate(int maxFeatures)
+{
+	// place the first room in the center
+	if (!(makeRoom(NUM_COLS / 2, NUM_ROWS / 2, static_cast<Direction>(randomInt(4)), true)))
+	{
+		std::cout << "Unable to place the first room.\n";
+		return;
+	}
+
+	// we already placed 1 feature (the first room)
+	for (int i = 1; i < maxFeatures; ++i)
+	{
+		if (!createFeature())
+		{
+			std::cout << "Unable to place more features (placed " << i << ").\n";
+			break;
+		}
+	}
+
+	/*if (!placeObject(UpStairs))
+	{
+		std::cout << "Unable to place up stairs.\n";
+		return;
+	}
+
+	if (!placeObject(DownStairs))
+	{
+		std::cout << "Unable to place down stairs.\n";
+		return;
+	}*/
+	loader.SetID("tiles", "floor");
+	for (int i = 0; i < NUM_COLS * NUM_ROWS; i++)
+	{
+		if (backgroundTiles[i] == nullptr)
+			backgroundTiles[i] = new Tile(loader.GetID(), loader.GetType(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable());
+		//else if (tile == Floor || tile == Corridor)
+		//	tile = ' ';
+	}
+}
+

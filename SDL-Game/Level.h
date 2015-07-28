@@ -6,24 +6,57 @@
 #include "Player.h"
 #include "NPC.h"
 #include "Tile.h"
+#include "TileLoader.h"
+
+
+
+struct Rect
+{
+	int x, y;
+	int width, height;
+};
 
 class Level
 {
 private:
-	const int NUM_ROWS;
-	const int NUM_COLS;
+	
+
+
+	enum Direction
+	{
+		North,
+		South,
+		West,
+		East,
+		DirectionCount
+	};
 
 	std::vector<Tile*> backgroundTiles;
 	std::vector<Tile*> tokenTiles;
+
+	TileLoader loader;
+
+	std::vector<Rect> rooms;
+	std::vector<Rect> exits;
 	
+	void generate(int maxFeatures);
+	bool createFeature();
+	bool createFeature(int x, int y, Direction dir);
+	bool makeRoom(int x, int y, Direction dir, bool firstRoom = false);
+	bool makeCorridor(int x, int y, Direction dir);
+	//ID for tile type
+	bool placeRect(const Rect& rect, std::string id);
+	bool placeObject(std::string id);
+
 public:
 	Level(int width, int height);
 	~Level();
 
+	const int NUM_ROWS;
+	const int NUM_COLS;
+
 	Player* player;
 	std::list<Entity*> tokenList;
-
-	bool IsBlocked(short x, short y, void*);
 
 	void SetBackgroundTile(int x, int y, Tile* tile);
 	Tile* GetBackgroundTile(int x, int y);

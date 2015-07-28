@@ -13,9 +13,9 @@ TileLoader::~TileLoader()
 }
 
 
-void TileLoader::SetID(std::string type,std::string id)
+void TileLoader::SetID(std::string file,std::string id)
 {
-	std::ifstream in("data/" + type + ".json");
+	std::ifstream in("data/" + file + ".json");
 	Json::Value value;
 
 	spriteNums.clear();
@@ -23,27 +23,31 @@ void TileLoader::SetID(std::string type,std::string id)
 	in >> value;
 	for (Json::Value::iterator it = value.begin(); it != value.end(); it++)
 	{
-		if ((*it)["id"] == id)
+		for (Json::Value::iterator j = (*it)["subtypes"].begin(); j != (*it)["subtypes"].end(); j++)
 		{
-			//getting array of sprites
-			if ((*it)["sprite"].isArray())
+			if ((*j)["id"] == id)
 			{
-				for (size_t i = 0; i < (*it)["sprite"].size(); i++)
-					spriteNums.push_back((*it)["sprite"][i].asInt());
-			}
-			//else just use the only one
-			else
-				spriteNums.push_back((*it)["sprite"].asInt());
+				//getting array of sprites
+				if ((*j)["sprite"].isArray())
+				{
+					for (size_t i = 0; i < (*j)["sprite"].size(); i++)
+						spriteNums.push_back((*j)["sprite"][i].asInt());
+				}
+				//else just use the only one
+				else
+					spriteNums.push_back((*j)["sprite"].asInt());
 
-			//set other values
-			id = (*it)["id"].asString();
+				//set other values
+				this->id = (*j)["id"].asString();
+				type = (*it)["type"].asString();
 
-			if ((*it)["colour"].isArray())
-			{
-				colourMod = (((*it)["colour"][0].asInt() << 16) | ((*it)["colour"][1].asInt() << 8) | ((*it)["colour"][2].asInt()));
+				if ((*j)["colour"].isArray())
+				{
+					colourMod = (((*j)["colour"][0].asInt() << 16) | ((*j)["colour"][1].asInt() << 8) | ((*j)["colour"][2].asInt()));
+				}
+				isWalkable = (*j)["isWalkable"].asBool();
+				break;
 			}
-			isWalkable = (*it)["isWalkable"].asBool();
-			break;
 		}
 	}
 
@@ -53,6 +57,11 @@ std::string TileLoader::GetID(void)
 {
 	return id;
 }
+std::string TileLoader::GetType(void)
+{
+	return type;
+}
+
 int TileLoader::GetSpriteNum(void)
 {
 	std::uniform_int_distribution<int> dist(0, spriteNums.size() - 1);
@@ -68,9 +77,9 @@ bool TileLoader::GetIsWalkable(void)
 	return isWalkable;
 }
 
-std::vector<TileLoader*> TileLoader::GetAllOfType(std::string type)
+std::vector<TileLoader*> TileLoader::GetAllOfFile(std::string file)
 {
-	std::ifstream in("data/" + type + ".json");
+	std::ifstream in("data/" + file + ".json");
 	Json::Value value;
 
 	std::vector<TileLoader*> loaders;
@@ -78,13 +87,42 @@ std::vector<TileLoader*> TileLoader::GetAllOfType(std::string type)
 	in >> value;
 	for (Json::Value::iterator it = value.begin(); it != value.end(); it++)
 	{
-		if ((*it)["id"] != NULL)
+		for (Json::Value::iterator j = (*it)["subtypes"].begin(); j != (*it)["subtypes"].end(); j++)
 		{
-			TileLoader* loader = new TileLoader();
-			loader->SetID(type, (*it)["id"].asString());
-			loaders.push_back(loader);
+			if ((*j)["id"] != NULL)
+			{
+				TileLoader* loader = new TileLoader();
+				loader->SetID(file, (*j)["id"].asString());
+				loaders.push_back(loader);
+			}
 		}
 		
+	}
+	return loaders;
+}
+std::vector<TileLoader*> TileLoader::GetAllOfType(std::string file, std::string type)
+{
+	std::ifstream in("data/" + file + ".json");
+	Json::Value value;
+
+	std::vector<TileLoader*> loaders;
+
+	in >> value;
+	for (Json::Value::iterator it = value.begin(); it != value.end(); it++)
+	{
+		if ((*it)["type"] == type)
+		{
+			for (Json::Value::iterator j = (*it)["subtypes"].begin(); j != (*it)["subtypes"].end(); j++)
+			{
+				if ((*j)["id"] != NULL)
+				{
+					TileLoader* loader = new TileLoader();
+					loader->SetID(file, (*j)["id"].asString());
+					loaders.push_back(loader);
+				}
+			}
+		}
+
 	}
 	return loaders;
 }

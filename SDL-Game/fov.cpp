@@ -5,9 +5,10 @@
 #include "Player.h"
 #include "NPC.h"
 
-const int radius = 100;
+
 void fov(int x, int y, Level* lev, Entity* me)
 {
+	int radius = lev->NUM_COLS;
 	int i, j;
 	for (i = -(int)radius; i <= radius; i++) //iterate out of map bounds as well
 		for (j = -(int)radius; j <= radius; j++)
@@ -39,7 +40,8 @@ void los(int x0, int y0, int x1, int y1, Level* lev, Entity* me)
 	while (xnext != x1 || ynext != y1)
 	{
 		// check map bounds here if needed
-		if (!lev->GetBackgroundTile(xnext,ynext) || !lev->GetBackgroundTile(xnext,ynext)->isWalkable) // or any equivalent
+		//!(xnext < 0 || xnext > lev->NUM_COLS || ynext < 0 || ynext > lev->NUM_ROWS) &&
+		if (!lev->GetBackgroundTile(xnext,ynext)->isWalkable) // or any equivalent
 		{
 
 			if (Player* play = dynamic_cast<Player*> (me))

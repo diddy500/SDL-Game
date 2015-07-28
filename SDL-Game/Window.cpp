@@ -64,6 +64,11 @@ void Window::updateWindow()
 				sprite = screenTiles[j + i * col]->spriteNum;
 				colourMod = screenTiles[j + i * col]->colourMod;
 			}
+			else if (screenTiles[j + i * col] && screenTiles[j + i * col]->isMemorized)
+			{
+				sprite = screenTiles[j + i * col]->spriteNum;
+				colourMod = 0xAAAAAA;
+			}
 			else
 			{
 				sprite = 0;

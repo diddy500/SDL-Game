@@ -10,6 +10,7 @@
 #include "Window.h"
 #include "Player.h"
 #include "Tile.h"
+#include "TileLoader.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,6 +25,8 @@ int main(int argc, char *argv[])
 	const int SPRITE_HEIGHT = GetPrivateProfileInt("video", "sprite_height", 500, "Config/config.ini");
 	const std::string SHEET_PATH = tempPath;
 
+	TileLoader loader;
+	std::vector<TileLoader*> loaders = loader.GetAllOfType("Tiles", "floor");
 
 	//Init
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)

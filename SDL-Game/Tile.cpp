@@ -4,7 +4,7 @@
 #include <random>
 
 
-Tile::Tile(std::string id, int spriteNum, int colourMod, bool isWalkable) : id(id)
+Tile::Tile(std::string id, std::string type, int spriteNum, int colourMod, bool isWalkable) : id(id), type(type)
 {
 	this->spriteNum = spriteNum;
 	this->isWalkable = isWalkable;

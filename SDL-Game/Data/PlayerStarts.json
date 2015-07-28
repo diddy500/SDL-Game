@@ -1,0 +1,13 @@
+[
+    {
+        "type": "human",
+        "subtypes": [
+            {
+                "id": "nobel",
+                "sprite": 1,
+                "colour": [ 0, 255, 255 ],
+                "isWalkable": false
+            }
+        ]
+    }
+        ]
