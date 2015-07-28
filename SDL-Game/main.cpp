@@ -56,18 +56,21 @@ int main(int argc, char *argv[])
 
 	Window win(window, renderer, sheet, lev, lev->player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	
+
 	//gameLoop
 	const int TICKS_PER_SECOND = 50;
 	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
 	const int MAX_FRAMESKIP = 10;
+
+	
+
 
 	ULONGLONG next_game_tick = GetTickCount64();
 	int loops;
 
 	SDL_Event e;
 	bool quit = false;
-	
+
 	while (!quit)
 	{
 		loops = 0;
@@ -94,10 +97,12 @@ int main(int argc, char *argv[])
 
 			next_game_tick += SKIP_TICKS;
 			loops++;
+			
 		}
 
-		
+
 		win.updateWindow();
+
 
 	}
 	SDL_Quit();
