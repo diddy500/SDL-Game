@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Entity">
-    <Position X="8.25" Y="7" Width="1.5" />
+    <Position X="9.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EIAAAAAAAIAAAAAAAACAAAAAACAAAAAAYABgADAAAAA=</HashCode>
+      <HashCode>EIAAAAAIAIAAAAAAAACAAAAAACAAAACAYABgADAAAAo=</HashCode>
       <FileName>Entity.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -11,21 +11,21 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Tile">
-    <Position X="8.25" Y="3.25" Width="1.75" />
+    <Position X="9.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAEAAAAAAAABAAAAAAAAABECAAAAAAACAAAwA=</HashCode>
       <FileName>Tile.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NPC">
-    <Position X="7" Y="10.75" Width="1.5" />
+    <Position X="8" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>NPC.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Level">
-    <Position X="3.5" Y="10.75" Width="2.75" />
+    <Position X="4.5" Y="8.75" Width="2.75" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -34,67 +34,67 @@
       <FileName>Level.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="player" />
       <Field Name="loader" />
+      <Field Name="player" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Player">
-    <Position X="9.25" Y="10.75" Width="1.75" />
+    <Position X="10.25" Y="9" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAIAIAAAAAAAAAAAAAAAAAAAAAABAAQAAABA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpriteSheet">
-    <Position X="4" Y="0.5" Width="2.75" />
+    <Position X="2" Y="3" Width="2.75" />
     <TypeIdentifier>
       <HashCode>EAAAIAACBAAAAYQAQAIAAEJEAAAAAgEAAAAAAEAQAAA=</HashCode>
       <FileName>SpriteSheet.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TileLoader">
-    <Position X="3.5" Y="17.25" Width="1.5" />
+    <Position X="1.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgiIBAAAEAAAAAAAAhAAgAAAAAABAAEICQAAIAAAAhA=</HashCode>
       <FileName>TileLoader.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Window">
-    <Position X="4.75" Y="6.25" Width="2.25" />
+    <Position X="5.75" Y="4.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAACAAACRESAgAQAAAAEIAAAACAAAgAA=</HashCode>
       <FileName>Window.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
+      <Field Name="counter" />
       <Field Name="sheet" />
       <Field Name="lev" />
-      <Field Name="counter" />
       <Field Name="entCamFollows" />
     </ShowAsAssociation>
   </Class>
   <Class Name="FPSCounter">
-    <Position X="1.5" Y="6.5" Width="1.75" />
+    <Position X="5.5" Y="1" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAABAAgAAAAAAAAAAAAABAAEQAAAAA=</HashCode>
       <FileName>FPSCounter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="Rect" Collapsed="true">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="13" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
       <FileName>Level.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Enum Name="Direction" Collapsed="true">
-    <Position X="12" Y="1.75" Width="1.5" />
+    <Position X="13" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAAABAAQ=</HashCode>
       <FileName>Direction.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="SheetChars" Collapsed="true">
-    <Position X="13.75" Y="1.75" Width="1.5" />
+    <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAABAAAAAAABAIAAAAAAIEAAAAAgCAQAAAAABA=</HashCode>
       <FileName>SheetEnum.h</FileName>

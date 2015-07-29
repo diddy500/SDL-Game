@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL-Game", "SDL-Game\SDL-Game.vcxproj", "{FFDB5F01-B580-43DA-8244-8E5F4F16F0C5}"
 EndProject
@@ -31,8 +31,5 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FFDB5F01-B580-43DA-8244-8E5F4F16F0C5} = {B08A185C-6FFB-4FCA-A531-1A89E74B5023}
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
