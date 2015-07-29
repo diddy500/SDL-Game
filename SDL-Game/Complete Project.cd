@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Entity">
-    <Position X="2.75" Y="3.75" Width="1.5" />
+    <Position X="8.25" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EIAAAAAAAIAAAAAAAACAAAAAACAAAAAAYABgADAAAAA=</HashCode>
       <FileName>Entity.h</FileName>
@@ -11,60 +11,94 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Tile">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+    <Position X="8.25" Y="3.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAEAAAAAAAABAAAAAAAAAAACAAAAAAACAAAwA=</HashCode>
+      <HashCode>AgAAAAAAEAAAAAAAABAAAAAAAAABECAAAAAAACAAAwA=</HashCode>
       <FileName>Tile.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NPC">
-    <Position X="1.5" Y="7.75" Width="1.5" />
+    <Position X="7" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>NPC.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Level">
-    <Position X="5.75" Y="2" Width="2.5" />
+    <Position X="3.5" Y="10.75" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AQDBASAAAEAAAACAAAAAIAAAAAEAQgIBAQQAAAAAAAA=</HashCode>
+      <HashCode>CQDBASAAAEAAAACBAAIAIAQAAgEAQAIBQQQAAAAAAAA=</HashCode>
       <FileName>Level.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="player" />
+      <Field Name="loader" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Player">
-    <Position X="3.75" Y="7.75" Width="1.75" />
+    <Position X="9.25" Y="10.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAIAIAAAAAAAAAAAAAAAAAAAAAABAAQAAABA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpriteSheet">
-    <Position X="12.75" Y="1.5" Width="2.75" />
+    <Position X="4" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>EAAAIAACBAAAAYQAQAIAAEJEAAAAAgEAAAAAAEAQAAA=</HashCode>
       <FileName>SpriteSheet.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TileLoader" Collapsed="true">
-    <Position X="16.5" Y="0.5" Width="1.5" />
+  <Class Name="TileLoader">
+    <Position X="3.5" Y="17.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgiIBAAAEAAAAAAAAhAAgAAAAAAAAAAICQAAAAAAAhA=</HashCode>
+      <HashCode>AgiIBAAAEAAAAAAAAhAAgAAAAAABAAEICQAAIAAAAhA=</HashCode>
       <FileName>TileLoader.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Window">
-    <Position X="9.5" Y="2" Width="2.25" />
+    <Position X="4.75" Y="6.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAACAAACRESAgAQAAAAAIAAAACAAAgAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAACAAACRESAgAQAAAAEIAAAACAAAgAA=</HashCode>
       <FileName>Window.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="sheet" />
       <Field Name="lev" />
+      <Field Name="counter" />
+      <Field Name="entCamFollows" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="FPSCounter">
+    <Position X="1.5" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAABAAgAAAAAAAAAAAAABAAEQAAAAA=</HashCode>
+      <FileName>FPSCounter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Rect" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Direction" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>Direction.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SheetChars" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAABAAAAAAABAIAAAAAAIEAAAAAgCAQAAAAABA=</HashCode>
+      <FileName>SheetEnum.h</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

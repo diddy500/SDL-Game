@@ -28,6 +28,9 @@
     <Filter Include="FOV">
       <UniqueIdentifier>{f547c2d8-038b-45cc-af11-388c3055c31c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\enums_structs">
+      <UniqueIdentifier>{8c722acb-50b5-4d38-aacf-b1e51ab16a1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jsoncpp.cpp">
@@ -67,6 +70,9 @@
       <Filter>FOV</Filter>
     </ClCompile>
     <ClCompile Include="FPSCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -112,6 +118,15 @@
     </ClInclude>
     <ClInclude Include="FPSCounter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Header Files\enums_structs</Filter>
+    </ClInclude>
+    <ClInclude Include="SheetEnum.h">
+      <Filter>Header Files\enums_structs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

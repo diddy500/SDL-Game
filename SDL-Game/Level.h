@@ -8,6 +8,7 @@
 #include "Tile.h"
 #include "TileLoader.h"
 
+#include "Direction.h"
 
 
 struct Rect
@@ -22,14 +23,6 @@ private:
 	
 
 
-	enum Direction
-	{
-		North,
-		South,
-		West,
-		East,
-		DirectionCount
-	};
 
 	std::vector<Tile*> backgroundTiles;
 	std::vector<Tile*> tokenTiles;

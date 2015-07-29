@@ -26,14 +26,7 @@ namespace
 	}
 }
 
-enum Direction
-{
-	North,
-	South,
-	West,
-	East,
-	DirectionCount
-};
+
 
 Level::Level(int width, int height) : NUM_COLS(width), NUM_ROWS(height), backgroundTiles(width * height), tokenTiles(width * height)
 {

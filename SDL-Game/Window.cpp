@@ -1,5 +1,6 @@
 #include "Window.h"
 
+#include "SheetEnum.h"
 
 Window::Window(SDL_Window* window, SDL_Renderer* renderer, SpriteSheet* sheet, Level* lev,Entity* camFollow, int screenW, int screenH) : SCREEN_WIDTH(screenW), SCREEN_HEIGHT(screenH)
 {

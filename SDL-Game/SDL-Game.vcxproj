@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="fov.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
@@ -27,7 +28,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cleanup.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="fov.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="json\json-forwards.h" />
@@ -35,6 +38,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SheetEnum.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileLoader.h" />

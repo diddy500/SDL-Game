@@ -13,6 +13,11 @@ protected:
 	int x;
 	int y;
 	Level* lev;
+
+	int attack;
+	int defense;
+	int health;
+	int maxHealth;
 public:
 	Entity(std::string id, std::string type, int spriteNum, int colourMod, bool isWalkable, Level* lev, int maxX, int maxY, int x, int y);
 	~Entity();
@@ -24,4 +29,3 @@ public:
 
 	virtual void Move(int) = 0;
 };
-
