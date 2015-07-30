@@ -1,17 +1,20 @@
 #pragma once
+#include <array>
+#include <Windows.h>
+
 class FPSCounter
 {
 private:
 
-	static int frames;
-	static double starttime;
-	static double fps;
+	ULONGLONG frames;
+	ULONGLONG starttime;
+	ULONGLONG fps;
 public:
 	FPSCounter();
 	~FPSCounter();
 
 	void checkFPS(void);
-	double GetFPS(void);
+	std::array<int, 2> GetFPS(void);
 
 };
 

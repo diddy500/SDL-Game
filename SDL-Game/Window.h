@@ -13,11 +13,10 @@
 class Window
 {
 private:
-
-	
-
 	const int SCREEN_WIDTH;
 	const int SCREEN_HEIGHT;
+	int col;
+	int row;
 
 	FPSCounter counter;
 
@@ -25,9 +24,11 @@ private:
 	SDL_Renderer* renderer;
 	SpriteSheet* sheet;
 	Level* lev;
+	Console* console;
 	Entity* entCamFollows;
 	std::vector<Tile*> screenTiles;
 
+	void UpdateScreenTile(int x, int y);
 public:
 	Window(SDL_Window* window, SDL_Renderer* renderer, SpriteSheet* sheet, Level* lev,Entity* camFollow, int screenW, int screenH);
 	~Window();

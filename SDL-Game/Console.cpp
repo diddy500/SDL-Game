@@ -1,7 +1,7 @@
 #include "Console.h"
 
 
-Console::Console()
+Console::Console(int width, int height) : COLS(width), ROWS(height), consoleTileSprites(COLS * ROWS)
 {
 }
 
