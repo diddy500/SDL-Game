@@ -13,7 +13,7 @@ TileLoader::~TileLoader()
 }
 
 
-void TileLoader::SetID(std::string file,std::string id)
+void TileLoader::SetID(std::string file,std::string newID)
 {
 	std::ifstream in("data/" + file + ".json");
 	Json::Value value;
@@ -25,7 +25,7 @@ void TileLoader::SetID(std::string file,std::string id)
 	{
 		for (Json::Value::iterator j = (*it)["subtypes"].begin(); j != (*it)["subtypes"].end(); j++)
 		{
-			if ((*j)["id"] == id)
+			if ((*j)["id"] == newID)
 			{
 				//getting array of sprites
 				if ((*j)["sprite"].isArray())
@@ -100,7 +100,7 @@ std::vector<TileLoader*> TileLoader::GetAllOfFile(std::string file)
 	}
 	return loaders;
 }
-std::vector<TileLoader*> TileLoader::GetAllOfType(std::string file, std::string type)
+std::vector<TileLoader*> TileLoader::GetAllOfType(std::string file, std::string newType)
 {
 	std::ifstream in("data/" + file + ".json");
 	Json::Value value;
@@ -110,7 +110,7 @@ std::vector<TileLoader*> TileLoader::GetAllOfType(std::string file, std::string 
 	in >> value;
 	for (Json::Value::iterator it = value.begin(); it != value.end(); it++)
 	{
-		if ((*it)["type"] == type)
+		if ((*it)["type"] == newType)
 		{
 			for (Json::Value::iterator j = (*it)["subtypes"].begin(); j != (*it)["subtypes"].end(); j++)
 			{

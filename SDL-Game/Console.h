@@ -2,7 +2,7 @@
 #include <vector>
 #include <memory>
 #include "Tile.h"
-#include "SpriteSheet.h"
+
 
 
 class Console
@@ -10,11 +10,14 @@ class Console
 private:
 	const int COLS;
 	const int ROWS;
-	std::vector<std::shared_ptr<Tile>> consoleTileSprites;
+	std::vector<Tile*> consoleTileSprites;
 public:
 	Console(int width, int height);
 	~Console();
 
-	
+	Tile* GetTile(int x,int y);
+	void SetTile(int x, int y, Tile* tile);
+
+	void UpdateStats();
 };
 

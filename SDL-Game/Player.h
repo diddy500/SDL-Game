@@ -11,6 +11,6 @@ public:
 
 	void Move(int keynum);
 	void CheckVision();
-	void SeeTile(short x, short y);
+	void SeeTile(int checkX, int checkY);
 };
 

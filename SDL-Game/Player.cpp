@@ -70,13 +70,13 @@ void Player::CheckVision()
 {
 	fov(GetX(), GetY(), lev, this);
 }
-void Player::SeeTile(short x, short y)
+void Player::SeeTile(int checkX, int checkY)
 {
-	if (lev->GetBackgroundTile(x, y))
+	if (lev->GetBackgroundTile(checkX, checkY))
 	{
-		lev->GetBackgroundTile(x, y)->isVisible = true;
-		lev->GetBackgroundTile(x, y)->isMemorized = true;
+		lev->GetBackgroundTile(checkX, checkY)->isVisible = true;
+		lev->GetBackgroundTile(checkX, checkY)->isMemorized = true;
 	}
-	if (lev->GetTokenTile(x, y))
-		lev->GetTokenTile(x, y)->isVisible = true;
+	if (lev->GetTokenTile(checkX, checkY))
+		lev->GetTokenTile(checkX, checkY)->isVisible = true;
 }

@@ -28,12 +28,12 @@ int Entity::GetY(void)
 }
 
 
-void Entity::SetPos(int x, int y)
+void Entity::SetPos(int newX, int newY)
 {
-	if (x >= 0 && x < maxX)
-		this->x = x;
-	if (y >= 0 && y < maxY)
-		this->y = y;
+	if (newX >= 0 && newX < maxX)
+		this->x = newX;
+	if (newY >= 0 && newY < maxY)
+		this->y = newY;
 }
 
 

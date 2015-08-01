@@ -32,7 +32,6 @@ Level::Level(int width, int height) : NUM_COLS(width), NUM_ROWS(height), backgro
 {
 	GenerateLevel();
 
-	TileLoader loader;
 	loader.SetID("playerStarts", "nobel");
 	GenerateTokens();
 	player = new Player(loader.GetID(), loader.GetType(), loader.GetSpriteNum(), loader.GetColourMod(), loader.GetIsWalkable(), this, NUM_ROWS, NUM_COLS, rooms[0].x, rooms[0].y);
@@ -81,7 +80,6 @@ void Level::GenerateLevel()
 
 void Level::GenerateTokens()
 {
-	TileLoader loader;
 	std::vector<TileLoader*> creatures = loader.GetAllOfFile("creatures");;
 
 	int numCreatures = rooms.size() * 2;
@@ -114,8 +112,6 @@ void Level::GenerateTokens()
 
 void Level::UpdateLevel()
 {
-	std::random_device rd;
-	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> dist(0, 4);
 
 	if (!player->isPlayerTurn)

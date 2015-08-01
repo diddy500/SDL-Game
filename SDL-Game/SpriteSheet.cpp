@@ -9,7 +9,7 @@ SpriteSheet::SpriteSheet(std::string file, SDL_Renderer* renderer, int spriteW, 
 
 	ren = renderer;
 
-	texture = loadTexture(file);
+	loadTexture(file);
 	if (texture == nullptr)
 	{
 		cleanup(texture);
@@ -51,9 +51,9 @@ int SpriteSheet::GetSpriteHeight(void)
 	return sH;
 }
 
-SDL_Texture* SpriteSheet::loadTexture(const std::string &file)
+void SpriteSheet::loadTexture(const std::string &file)
 {
-	SDL_Texture *texture = nullptr;
+	texture = nullptr;
 	SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
 
 	if (loadedImage != nullptr)
@@ -71,7 +71,6 @@ SDL_Texture* SpriteSheet::loadTexture(const std::string &file)
 	{
 		logSDLError(std::cout, "LoadBMP");
 	}
-	return texture;
 }
 
 void SpriteSheet::loadSpriteSheet()

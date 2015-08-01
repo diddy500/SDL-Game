@@ -25,7 +25,7 @@ public:
 	int GetX(void);
 	int GetY(void);
 
-	void SetPos(int x, int y);
+	void SetPos(int newX, int newY);
 
 	virtual void Move(int) = 0;
 };
