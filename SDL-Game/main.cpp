@@ -12,7 +12,7 @@
 #include "Tile.h"
 #include "TileLoader.h"
 
-int main(int argc, char *argv[])
+int main(int , char *[])
 {
 	//getting config information
 	TCHAR tempPath[255];

@@ -7,10 +7,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL-Game", "SDL-Game\SDL-Ga
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{B08A185C-6FFB-4FCA-A531-1A89E74B5023}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Roguelike", "Roguelike\Roguelike.vcxproj", "{A41627CA-E04E-4738-BDD1-D36C575C7813}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
 		Debug|Win32 = Debug|Win32
@@ -28,6 +27,16 @@ Global
 		{FFDB5F01-B580-43DA-8244-8E5F4F16F0C5}.Release|Win32.ActiveCfg = Release|Win32
 		{FFDB5F01-B580-43DA-8244-8E5F4F16F0C5}.Release|Win32.Build.0 = Release|Win32
 		{FFDB5F01-B580-43DA-8244-8E5F4F16F0C5}.Release|x64.ActiveCfg = Release|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Debug|ARM.ActiveCfg = Debug|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Debug|Win32.Build.0 = Debug|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Debug|x64.ActiveCfg = Debug|x64
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Debug|x64.Build.0 = Debug|x64
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Release|ARM.ActiveCfg = Release|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Release|Win32.ActiveCfg = Release|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Release|Win32.Build.0 = Release|Win32
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Release|x64.ActiveCfg = Release|x64
+		{A41627CA-E04E-4738-BDD1-D36C575C7813}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
