@@ -3,8 +3,7 @@
 
 #include "Utility.h"
 
-class Entity :
-	public Tile
+class Entity
 {
 public:
 	explicit Entity(std::string newID,
@@ -24,6 +23,7 @@ public:
 	virtual void Move(Direction dir);
 
 private:
+	Tile tileInfo;
 	Point position;
 	int health;
 	int maxHealth;

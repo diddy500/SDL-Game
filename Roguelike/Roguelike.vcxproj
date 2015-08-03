@@ -154,6 +154,8 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="json\json-forwards.h" />
+    <ClInclude Include="json\json.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Tile.h" />
@@ -176,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteProject.cd" />
+    <None Include="Data\Creatures.json" />
+    <None Include="Data\PlayerStarts.json" />
+    <None Include="Data\Tiles.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

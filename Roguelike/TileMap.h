@@ -26,4 +26,3 @@ private:
 	std::vector<std::shared_ptr<Tile>> tiles;
 	bool inBounds(int x, int y) const;
 };
-

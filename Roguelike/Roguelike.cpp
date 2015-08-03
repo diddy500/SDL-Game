@@ -1,16 +1,20 @@
 // Roguelike.cpp : Defines the entry point for the console application.
 //
 
+#include <Windows.h>
+#include <SDL.h>
+#include <string>
+#include <json\json.h>
 #include "stdafx.h"
 #include "Utility.h"
 #include "Entity.h"
-#include <SDL.h>
+
 
 
 int main(int , char *[])
 {
-	Entity ent("ID", 0, 0, Point(1, 1), 10, 10, 10, 10, false);
-	ent.Move(NORTH);
+	//getting config information
+	
 
 
     return 0;

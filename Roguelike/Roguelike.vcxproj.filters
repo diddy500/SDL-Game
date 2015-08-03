@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Addon headers">
+      <UniqueIdentifier>{6637cce5-ff5b-4e35-8bc5-9673f5a4263e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Json Files">
+      <UniqueIdentifier>{0568f924-a88c-453b-8876-a739ad627edc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -38,6 +44,12 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json-forwards.h">
+      <Filter>Addon headers</Filter>
+    </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>Addon headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,5 +77,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CompleteProject.cd" />
+    <None Include="Data\Creatures.json">
+      <Filter>Json Files</Filter>
+    </None>
+    <None Include="Data\PlayerStarts.json">
+      <Filter>Json Files</Filter>
+    </None>
+    <None Include="Data\Tiles.json">
+      <Filter>Json Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
