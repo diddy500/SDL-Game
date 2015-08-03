@@ -9,8 +9,11 @@
 class GameController
 {
 public:
-	GameController(const int resX, const int resY, const int levelWidth, const int levelHeight);
+	GameController(const int resX, const int resY, const int levelWidth, const int levelHeight, const int spriteWidth, const int spriteHeight);
 	~GameController();
+
+	void updateGame();
+	void displayGame();
 private:
 	TileMap levelTiles;
 	TileMap screen;

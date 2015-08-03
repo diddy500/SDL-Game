@@ -45,12 +45,6 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json\json-forwards.h">
-      <Filter>Addon headers</Filter>
-    </ClInclude>
-    <ClInclude Include="json\json.h">
-      <Filter>Addon headers</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -84,6 +78,9 @@
       <Filter>Json Files</Filter>
     </None>
     <None Include="Data\Tiles.json">
+      <Filter>Json Files</Filter>
+    </None>
+    <None Include="Data\Config.json">
       <Filter>Json Files</Filter>
     </None>
   </ItemGroup>
