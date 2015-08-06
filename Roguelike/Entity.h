@@ -1,12 +1,14 @@
 #pragma once
-#include "Tile.h"
 
+#include "Tile.h"
 #include "Utility.h"
 
 class Entity
 {
 public:
-	explicit Entity(std::string newID,
+	explicit Entity(
+		std::string newType,
+		std::string newID,
 		int newSpriteNum,
 		int newColourMod,
 		Point position,
@@ -20,9 +22,12 @@ public:
 	virtual ~Entity();
 
 	const Point GetPosition() const;
+	const Tile GetTileInfo() const;
 	virtual void Move(Direction dir);
 
 private:
+	
+	
 	Tile tileInfo;
 	Point position;
 	int health;

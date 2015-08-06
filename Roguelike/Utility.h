@@ -17,7 +17,8 @@ enum Direction
 	EAST,
 	SOUTH,
 	WEST,
-	STAY
+	STAY,
+	NUM_DIRECTION
 };
 
 void LogError(std::string error);

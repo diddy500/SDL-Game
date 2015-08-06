@@ -6,17 +6,17 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <chrono>
+#include <Windows.h>
 
 #include <json\json.h>
 #include "Utility.h"
 #include "GameController.h"
-#include "Entity.h"
 
 
 
-int main(int , char *[])
+int main(int, char *[])
 {
+
 	//getting config information
 	std::ifstream in("data/config.json");
 	Json::Value value;
@@ -40,9 +40,10 @@ int main(int , char *[])
 		}
 	}
 
+	SDL_Init(SDL_INIT_EVERYTHING);
 
 	//Passing everything over to game controller
-	GameController controller(resX, resY, levelX, levelY, spriteX, spriteY);
+	GameController controller("Resources/curses_square_16x16.bmp", resX, resY, levelX, levelY, spriteX, spriteY);
 
 
 	const int TICKS_PER_SECOND = 25;
@@ -51,14 +52,16 @@ int main(int , char *[])
 
 	DWORD next_game_tick = GetTickCount();
 	int loops;
-	float interpolation;
+	//float interpolation;
 
 	bool game_is_running = true;
-	while (game_is_running) {
+	while (game_is_running) 
+	{
 
 		loops = 0;
-		while (GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP) {
-			controller.updateGame();
+		while (GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP && game_is_running) 
+		{
+			game_is_running = controller.updateGame();
 
 			next_game_tick += SKIP_TICKS;
 			loops++;
@@ -67,6 +70,7 @@ int main(int , char *[])
 		controller.displayGame();
 	}
 
-    return 0;
+	SDL_Quit();
+	return 0;
 }
 

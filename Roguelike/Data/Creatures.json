@@ -1,27 +1,51 @@
 [
-    {
-        "type": "monster",
-        "subtypes": [
-            {
-                "id": "goblin",
-                "sprite": 103,
-                "colour": [ 0, 255, 0 ],
-                "isWalkable": false
-            },
+  {
+    "type": "monster",
+    "subtypes": [
+      {
+        "id": "goblin",
+        "sprite": [ 103 ],
+        "colour": [ 0, 255, 0 ],
+        "health": [ 10 ],
+        "attack": [ 3 ],
+        "defense": [ 1 ],
+        "isWalkable": false
+      },
 
-            {
-                "id": "orc",
-                "sprite": 79,
-                "colour": [ 255, 100, 100 ],
-                "isWalkable": false
-            },
+      {
+        "id": "orc",
+        "sprite": [ 79 ],
+        "colour": [ 255, 100, 100 ],
+        "health": [ 10 ],
+        "attack": [ 3 ],
+        "defense": [ 3 ],
+        "isWalkable": false
+      },
 
-            {
-                "id": "duck",
-                "sprite": 100,
-                "colour": [ 0, 150, 0 ],
-                "isWalkable": false
-            }
-        ]
-    }
+      {
+        "id": "duck",
+        "sprite": [ 100 ],
+        "colour": [ 0, 150, 0 ],
+        "health": [ 10 ],
+        "attack": [ 1 ],
+        "defense": [ 0 ],
+        "isWalkable": false
+      }
+    ]
+  },
+  
+  {
+    "type": "human",
+    "subtypes": [
+      {
+        "id": "nobel",
+        "sprite": [ 1 ],
+        "colour": [ 0, 255, 255 ],
+        "health": [ 10 ],
+        "attack": [ 3 ],
+        "defense": [ 1 ],
+        "isWalkable": false
+      }
+    ]
+  }
 ]

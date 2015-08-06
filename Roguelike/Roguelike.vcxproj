@@ -153,7 +153,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DisplayControler.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityPrototype.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -162,7 +164,9 @@
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DisplayControler.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityPrototype.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Roguelike.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -187,7 +191,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Data_4Config_1json__JSONSchema="" />
+      <UserProperties />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
