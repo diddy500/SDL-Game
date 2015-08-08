@@ -11,6 +11,18 @@ struct Point
 	int y;
 };
 
+struct Rect
+{
+	explicit Rect::Rect()
+	{
+	}
+	explicit Rect::Rect(int x, int y, int width, int height) : x(x), y(y), width(width), height(height)
+	{
+	}
+	int x, y;
+	int width, height;
+};
+
 enum Direction
 {
 	NORTH,

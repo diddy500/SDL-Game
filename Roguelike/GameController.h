@@ -4,8 +4,11 @@
 #include <memory>
 
 #include "TileMap.h"
+#include "Level.h"
 #include "Entity.h"
 #include "DisplayControler.h"
+#include "InputController.h"
+#include "MovementController.h"
 
 class GameController
 {
@@ -17,11 +20,13 @@ public:
 	void displayGame();
 private:
 	SDL_Event e;
-	TileMap levelTiles;
+	Level levelTiles;
 	TileMap screen;
 	TileMap console;
-	std::list<std::shared_ptr<Entity>> entityList;
-	std::shared_ptr<DisplayControler> displayControler;
+	std::shared_ptr<std::list<std::shared_ptr<Entity>>> entityList;
+	DisplayControler displayControler;
+	InputController inputController;
+	MovementController movementController;
 
 	std::shared_ptr<Entity> player;
 };

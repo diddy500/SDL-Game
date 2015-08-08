@@ -14,6 +14,7 @@
 
 
 
+
 int main(int, char *[])
 {
 
@@ -45,21 +46,21 @@ int main(int, char *[])
 	//Passing everything over to game controller
 	GameController controller("Resources/curses_square_16x16.bmp", resX, resY, levelX, levelY, spriteX, spriteY);
 
-
 	const int TICKS_PER_SECOND = 25;
 	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
 	const int MAX_FRAMESKIP = 5;
 
-	DWORD next_game_tick = GetTickCount();
+	ULONGLONG next_game_tick = GetTickCount64();
 	int loops;
 	//float interpolation;
+	
 
 	bool game_is_running = true;
 	while (game_is_running) 
 	{
 
 		loops = 0;
-		while (GetTickCount() > next_game_tick && loops < MAX_FRAMESKIP && game_is_running) 
+		while (GetTickCount64() > next_game_tick && loops < MAX_FRAMESKIP && game_is_running) 
 		{
 			game_is_running = controller.updateGame();
 

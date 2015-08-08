@@ -1,54 +1,109 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
   <Class Name="GameController">
-    <Position X="5" Y="0.5" Width="3.5" />
+    <Position X="7" Y="4.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgJAABAAAAAAIAAQEAEAAAAACAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAAAAAgJAABAAAAAAIAAQEAEAAAAADAAACAAAAAgg=</HashCode>
       <FileName>GameController.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="levelTiles" />
       <Field Name="screen" />
       <Field Name="console" />
+      <Field Name="displayControler" />
+      <Field Name="inputController" />
+      <Field Name="levelTiles" />
+      <Field Name="movementController" />
     </ShowAsAssociation>
   </Class>
   <Class Name="TileMap">
-    <Position X="5.25" Y="4" Width="3" />
+    <Position X="11.75" Y="4" Width="3" />
     <TypeIdentifier>
       <HashCode>ARAAAAAAAAAAAAAAAAQAAAAAAgQAAAAAAAAAAABDAAA=</HashCode>
       <FileName>TileMap.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Entity">
-    <Position X="15.5" Y="1.75" Width="1.5" />
+  <Class Name="Entity" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAEIAKAAAAAAAAAAIAAAACAAAgCAAAAAEAAAAAo=</HashCode>
+      <HashCode>EAAAAAEIAKAAAAAAAAAAIBAAACAEAgCAAAAAEAAAAAo=</HashCode>
       <FileName>Entity.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DisplayControler">
-    <Position X="13.75" Y="1.75" Width="1.5" />
+    <Position X="9" Y="7.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAgCEEQAAAAAgAABAEBABAAAAAAAAAAAIAAA=</HashCode>
       <FileName>DisplayControler.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Tile">
-    <Position X="12" Y="1.75" Width="1.5" />
+  <Class Name="Tile" Collapsed="true">
+    <Position X="15.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAEAAAAAAAABAAAAAAAAAAECAAAAAAACAAAwA=</HashCode>
+      <HashCode>AgAAAAAAEAAAAAAAABAAAAAAIAABECAAAAAAACAAAwA=</HashCode>
       <FileName>Tile.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="Point">
-    <Position X="17.25" Y="1.75" Width="1.5" />
+  <Class Name="EntityPrototype" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABAhAAAAAAAECAAABAAAAAAABVAAAAAAAAAAAAgA=</HashCode>
+      <FileName>EntityPrototype.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level">
+    <Position X="12" Y="7" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="Level::Direction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Level.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CACAAAAAAAAAAAAAAAIAAAQAAgAAAAIBQAAAAAAAAAA=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TilePrototype" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAABAAAAAABAAACAAAAAAAAAAABEAAAAgAAAAAAAgA=</HashCode>
+      <FileName>TilePrototype.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputController">
+    <Position X="5" Y="7.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAIIAAAAAAAAAAAAAAAAABAIAAAAAAAAAAAg=</HashCode>
+      <FileName>InputController.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="movementController" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MovementController">
+    <Position X="5" Y="10.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAIAAAAAIAAAAAAAAAAEAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>MovementController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Point" Collapsed="true">
+    <Position X="15.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
       <FileName>Utility.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Enum Name="Direction">
-    <Position X="9.5" Y="4" Width="1.5" />
+  <Struct Name="Rect" Collapsed="true">
+    <Position X="17" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAACAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Utility.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Direction" Collapsed="true">
+    <Position X="15.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAABABAQAAAAAAAAAAAAQAAAAAAAABA=</HashCode>
       <FileName>Utility.h</FileName>
