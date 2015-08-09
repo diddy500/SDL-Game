@@ -19,5 +19,6 @@ private:
 	std::vector<int> spriteNums;
 	std::vector<int> colourMods;
 	bool isWalkable;
+	bool isOpaque;
 };
 

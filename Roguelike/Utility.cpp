@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+
 void LogError(std::string error)
 {
 	std::cerr << error << std::endl;

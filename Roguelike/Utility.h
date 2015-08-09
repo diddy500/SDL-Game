@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+
 struct Point
 {
 	explicit Point::Point(int x, int y) : x(x), y(y)
@@ -34,4 +35,3 @@ enum Direction
 };
 
 void LogError(std::string error);
-

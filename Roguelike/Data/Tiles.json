@@ -6,13 +6,15 @@
         "id": "floor",
         "sprite": [ 0, 249, 250 ],
         "colour": [ 100, 100, 100 ],
+        "isOpaque": false,
         "isWalkable": true
       },
 
       {
         "id": "smoothFloor",
-        "sprite": [ 43 ],
+        "sprite": [ 1 ],
         "colour": [ 255, 255, 255 ],
+        "isOpaque": false,
         "isWalkable": true
       }
     ]
@@ -25,8 +27,9 @@
       {
 
         "id": "wall",
-        "sprite": [ 219 ],
+        "sprite": [ 2 ],
         "colour": [ 255, 255, 255 ],
+        "isOpaque": true,
         "isWalkable": false
       }
     ]
@@ -38,16 +41,18 @@
       {
 
         "id": "upStairs",
-        "sprite": [ 60 ],
+        "sprite": [ 0 ],
         "colour": [ 255, 255, 255 ],
+        "isOpaque": false,
         "isWalkable": true
       },
 
       {
 
         "id": "downStairs",
-        "sprite": [ 62 ],
+        "sprite": [ 0 ],
         "colour": [ 255, 255, 255 ],
+        "isOpaque": false,
         "isWalkable": true
       }
 
@@ -60,8 +65,9 @@
 
       {
         "id": "door",
-        "sprite": [ 197 ],
+        "sprite": [ 4 ],
         "colour": [ 255, 255, 255 ],
+        "isOpaque": true,
         "isWalkable": true
       }
 

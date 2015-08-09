@@ -11,6 +11,8 @@ public:
 	Level(const int width, const int height);
 	~Level();
 
+	std::vector<Rect> rooms;
+
 	void generate(int maxFeatures);
 private:
 
@@ -23,7 +25,7 @@ private:
 		DirectionCount
 	};
 
-	std::vector<Rect> rooms;
+	
 	std::vector<Rect> exits;
 
 	bool createFeature();

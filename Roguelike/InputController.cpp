@@ -21,10 +21,12 @@ bool InputController::ProcessEvent(SDL_Event & e)
 				player = ent;
 		}
 		if (player)
+		{
 			if (movementController.Move(e.key.keysym.sym, player))
 			{
 				//call AI turn
 			}
+		}
 		else
 			LogError("No player found while trying to move");
 	}

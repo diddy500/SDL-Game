@@ -9,6 +9,7 @@
 #include "DisplayControler.h"
 #include "InputController.h"
 #include "MovementController.h"
+#include "FOV\fov.h"
 
 class GameController
 {
@@ -29,4 +30,6 @@ private:
 	MovementController movementController;
 
 	std::shared_ptr<Entity> player;
+	fov_settings_type settings;
+
 };

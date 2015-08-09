@@ -22,6 +22,7 @@ int main(int, char *[])
 	std::ifstream in("data/config.json");
 	Json::Value value;
 	int resX = NULL, resY = NULL, levelX = NULL, levelY = NULL, spriteX = NULL, spriteY = NULL;
+	std::string sheetPath = "";
 	in >> value;
 	for (Json::Value::iterator it = value.begin(); it != value.end(); it++)
 	{
@@ -29,6 +30,7 @@ int main(int, char *[])
 		{
 			resX = (*it)["ResX"].asInt();
 			resY = (*it)["ResY"].asInt();
+			sheetPath = (*it)["SpriteSheet"].asString();
 			levelX = (*it)["LevelX"].asInt();
 			levelY = (*it)["LevelY"].asInt();
 			spriteX = (*it)["SpriteX"].asInt();
@@ -44,7 +46,7 @@ int main(int, char *[])
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	//Passing everything over to game controller
-	GameController controller("Resources/curses_square_16x16.bmp", resX, resY, levelX, levelY, spriteX, spriteY);
+	GameController controller(sheetPath, resX, resY, levelX, levelY, spriteX, spriteY);
 
 	const int TICKS_PER_SECOND = 25;
 	const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;

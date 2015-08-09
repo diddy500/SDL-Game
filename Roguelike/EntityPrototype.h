@@ -23,5 +23,6 @@ private:
 	std::vector<int> attacks;
 	std::vector<int> defenses;
 	bool isWalkable;
+	bool isOpaque;
 };
 

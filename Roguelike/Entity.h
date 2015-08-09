@@ -21,6 +21,7 @@ public:
 		int attack,
 		int defense,
 		bool newIsWalkable,
+		bool newIsOpaque,
 		bool newIsVisible = false,
 		bool newIsMemorized = false,
 		bool newIsPlayer = false,

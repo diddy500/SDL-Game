@@ -9,6 +9,7 @@
         "health": [ 10 ],
         "attack": [ 3 ],
         "defense": [ 1 ],
+        "isOpaque": false,
         "isWalkable": false
       },
 
@@ -19,6 +20,7 @@
         "health": [ 10 ],
         "attack": [ 3 ],
         "defense": [ 3 ],
+        "isOpaque": false,
         "isWalkable": false
       },
 
@@ -29,6 +31,7 @@
         "health": [ 10 ],
         "attack": [ 1 ],
         "defense": [ 0 ],
+        "isOpaque": false,
         "isWalkable": false
       }
     ]
@@ -39,11 +42,12 @@
     "subtypes": [
       {
         "id": "nobel",
-        "sprite": [ 1 ],
+        "sprite": [ 3 ],
         "colour": [ 0, 255, 255 ],
         "health": [ 10 ],
         "attack": [ 3 ],
         "defense": [ 1 ],
+        "isOpaque": false,
         "isWalkable": false
       }
     ]

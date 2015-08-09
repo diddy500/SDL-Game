@@ -17,6 +17,10 @@ DisplayControler::DisplayControler(std::string file, int spriteWidth, int sprite
 	{
 		SDL_SetColorKey(loadedImage, SDL_TRUE, SDL_MapRGB(loadedImage->format, 0xFF, 0x00, 0xFF));
 		_spritesheet = SDL_CreateTextureFromSurface(_renderer, loadedImage);
+		if (!_spritesheet)
+		{
+			LogError("DisplayController: Error Loading texture");
+		}
 		SDL_FreeSurface(loadedImage);
 	}
 	else
@@ -51,9 +55,17 @@ void DisplayControler::renderScreen(const TileMap & screen)
 	{
 		for (int j = 0; j < screen.WIDTH; j++)
 		{
-			if (screen.GetTile(j, i))
+			if (screen.GetTile(j, i) && screen.GetTile(j, i)->isVisible)
 			{
 				renderSprite(j * _spriteWidth, i * _spriteHeight, screen.GetTile(j, i)->spriteNum, screen.GetTile(j, i)->colourMod);
+			}
+			else if (screen.GetTile(j, i) && screen.GetTile(j, i)->isMemorized)
+			{
+				renderSprite(j * _spriteWidth, i * _spriteHeight, screen.GetTile(j, i)->spriteNum, 0x555555);
+			}
+			else
+			{
+				renderSprite(j * _spriteWidth, i * _spriteHeight, 0, 0xFFFFFF);
 			}
 		}
 	}
