@@ -3,15 +3,15 @@
   <Class Name="GameController">
     <Position X="7" Y="4.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgJAABAAAAAAIAAQEAEAAAAADAAACAAAAAgg=</HashCode>
+      <HashCode>AAAAAAAAgJAABAAAAAAIAAQEAECAAAADAAACAAAAAgg=</HashCode>
       <FileName>GameController.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
+      <Field Name="levelTiles" />
       <Field Name="screen" />
       <Field Name="console" />
       <Field Name="displayControler" />
       <Field Name="inputController" />
-      <Field Name="levelTiles" />
       <Field Name="movementController" />
     </ShowAsAssociation>
   </Class>
@@ -39,14 +39,14 @@
   <Class Name="Tile" Collapsed="true">
     <Position X="15.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAEAAAAAAAABAAAAAAIAABECAAAAAAACAAAwA=</HashCode>
+      <HashCode>CgAAAAAAEAAAAAAAABAAAAAAIAABECAAAAAAACAAAwA=</HashCode>
       <FileName>Tile.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EntityPrototype" Collapsed="true">
     <Position X="17" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAABAhAAAAAAAECAAABAAAAAAABVAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>CgAABAhAAAAAAAECAAABAAAAAAABVAAAAAAAAAAAAgA=</HashCode>
       <FileName>EntityPrototype.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -67,7 +67,7 @@
   <Class Name="TilePrototype" Collapsed="true">
     <Position X="17" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AwAABAAAAAABAAACAAAAAAAAAAABEAAAAgAAAAAAAgA=</HashCode>
+      <HashCode>CwAABAAAAAABAAACAAAAAAAAAAABEAAAAgAAAAAAAgA=</HashCode>
       <FileName>TilePrototype.h</FileName>
     </TypeIdentifier>
   </Class>

@@ -17,5 +17,6 @@ private:
 	std::shared_ptr<std::list<std::shared_ptr<Entity>>> entityList;
 	Level &level;
 	bool isValidSpace(int x, int y);
+	std::shared_ptr<Entity> findInteractable(int x, int y);
 };
 

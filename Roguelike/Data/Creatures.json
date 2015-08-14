@@ -15,11 +15,11 @@
 
       {
         "id": "orc",
-        "sprite": [ 79 ],
+        "sprite": [ 5 ],
         "colour": [ 255, 100, 100 ],
         "health": [ 10 ],
         "attack": [ 3 ],
-        "defense": [ 3 ],
+        "defense": [ 0 ],
         "isOpaque": false,
         "isWalkable": false
       },

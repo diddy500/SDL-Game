@@ -4,6 +4,8 @@
 #include <list>
 #include "Entity.h"
 
+typedef std::shared_ptr<std::list<std::shared_ptr<Entity>>> EntityList;
+
 class Level :
 	public TileMap
 {
@@ -13,7 +15,7 @@ public:
 
 	std::vector<Rect> rooms;
 
-	void generate(int maxFeatures);
+	void generate(int maxFeatures, EntityList entityList);
 private:
 
 	enum Direction
@@ -35,5 +37,7 @@ private:
 	//ID for tile type
 	bool placeRect(const Rect& rect, std::string id);
 	bool placeObject(std::string id);
+	bool placeActor(std::string id, EntityList entityList);
+	bool placePlayer(std::string id, EntityList entityList);
 };
 

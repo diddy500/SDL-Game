@@ -29,10 +29,16 @@ void LightTile(void* map, int x, int y, int , int , void*)
 
 GameController::GameController(std::string file, const int resX, const int resY, const int levelWidth, const int levelHeight, const int spriteWidth, const int spriteHeight) : levelTiles(levelWidth, levelHeight), screen(resX / spriteWidth, resY / spriteHeight), console(resX / spriteWidth / 5, resY / spriteHeight), entityList(new std::list<std::shared_ptr<Entity>>), displayControler(file, spriteWidth, spriteHeight, resX, resY), inputController(entityList, movementController), movementController(entityList, levelTiles)
 {
-	levelTiles.generate(1000);
-	player = std::shared_ptr<Entity>(new Entity(EntityPrototype::GetEntity("nobel", levelTiles.rooms[0].x + 1, levelTiles.rooms[0].y + 1)));
-	player->isPlayer = true;
-	entityList->push_back(player);
+	levelTiles.generate(50, entityList);
+	
+	for (std::shared_ptr<Entity> ent : *entityList)
+	{
+		if (ent->isPlayer)
+		{
+			player = ent;
+			break;
+		}
+	}
 
 	//setting up FOV
 	fov_settings_init(&settings);
@@ -46,6 +52,14 @@ GameController::~GameController()
 
 bool GameController::updateGame()
 {
+	for (std::shared_ptr<Entity> ent : *entityList)
+	{
+		if (ent->isDead())
+		{
+			entityList->remove(ent);
+		}
+	}
+
 	while (SDL_PollEvent(&e))
 	{
 
@@ -109,9 +123,9 @@ void GameController::displayGame()
 			screen.SetTile(x, y, levelTiles.GetTile(x + offsetX, y + offsetY));
 		}
 	}
-	for (std::shared_ptr<Entity> ent : *entityList.get())
+	for (std::shared_ptr<Entity> ent : *entityList)
 	{
-		if (screen.inBounds(ent->GetPosition().x - offsetX, ent->GetPosition().y - offsetY))
+		if (ent->GetTileInfo()->isVisible && screen.inBounds(ent->GetPosition().x - offsetX, ent->GetPosition().y - offsetY))
 		{
 			screen.SetTile(ent->GetPosition().x - offsetX, ent->GetPosition().y - offsetY, ent->GetTileInfo());
 		}

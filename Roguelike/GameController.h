@@ -11,6 +11,8 @@
 #include "MovementController.h"
 #include "FOV\fov.h"
 
+typedef std::shared_ptr<std::list<std::shared_ptr<Entity>>> EntityList;
+
 class GameController
 {
 public:
@@ -24,7 +26,7 @@ private:
 	Level levelTiles;
 	TileMap screen;
 	TileMap console;
-	std::shared_ptr<std::list<std::shared_ptr<Entity>>> entityList;
+	EntityList entityList;
 	DisplayControler displayControler;
 	InputController inputController;
 	MovementController movementController;

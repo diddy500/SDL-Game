@@ -30,7 +30,9 @@ public:
 
 	const Point GetPosition() const;
 	const std::shared_ptr<Tile> GetTileInfo() const;
-	virtual void Move(Direction dir);
+	void Move(Direction dir);
+	void Interact(std::shared_ptr<Entity> target);
+	bool isDead();
 
 private:
 	
