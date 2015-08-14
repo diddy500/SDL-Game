@@ -1,0 +1,74 @@
+[
+  {
+    "type": "floor",
+    "subtypes": [
+      {
+        "id": "floor",
+        "sprite": [ 0, 249, 250 ],
+        "colour": [ 100, 100, 100 ],
+        "isOpaque": false,
+        "isWalkable": true
+      },
+
+      {
+        "id": "smoothFloor",
+        "sprite": [ 1 ],
+        "colour": [ 255, 255, 255 ],
+        "isOpaque": false,
+        "isWalkable": true
+      }
+    ]
+
+  },
+
+  {
+    "type": "wall",
+    "subtypes": [
+      {
+
+        "id": "wall",
+        "sprite": [ 2 ],
+        "colour": [ 255, 255, 255 ],
+        "isOpaque": true,
+        "isWalkable": false
+      }
+    ]
+  },
+
+  {
+    "type": "stairs",
+    "subtypes": [
+      {
+
+        "id": "upStairs",
+        "sprite": [ 0 ],
+        "colour": [ 255, 255, 255 ],
+        "isOpaque": false,
+        "isWalkable": true
+      },
+
+      {
+
+        "id": "downStairs",
+        "sprite": [ 0 ],
+        "colour": [ 255, 255, 255 ],
+        "isOpaque": false,
+        "isWalkable": true
+      }
+    ]
+  },
+  {
+    "type": "door",
+    "subtypes": [
+
+      {
+        "id": "door",
+        "sprite": [ 4 ],
+        "colour": [ 255, 255, 255 ],
+        "isOpaque": true,
+        "isWalkable": true
+      }
+
+    ]
+  }
+]
