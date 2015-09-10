@@ -16,6 +16,7 @@ public:
 	std::vector<Rect> rooms;
 
 	void generate(int maxFeatures, EntityList entityList);
+	void clear();
 private:
 
 	enum Direction

@@ -4,6 +4,12 @@
 #include "EntityPrototype.h"
 #include "Utility.h"
 
+//dumb thing for lists.remove-if( )
+bool isDeadHelper(std::shared_ptr<Entity> ent)
+{
+	return ent->isDead();
+}
+
 bool IsOpaque(void* map, int x, int y)
 {
 	Level* level(static_cast<Level*>(map));
@@ -17,7 +23,7 @@ bool IsOpaque(void* map, int x, int y)
 	}
 }
 //missing perams are reletive x and y and light source pointer
-void LightTile(void* map, int x, int y, int , int , void*)
+void LightTile(void* map, int x, int y, int, int, void*)
 {
 	Level* level(static_cast<Level*>(map));
 	if (level->GetTile(x, y))
@@ -29,7 +35,8 @@ void LightTile(void* map, int x, int y, int , int , void*)
 
 GameController::GameController(std::string file, const int resX, const int resY, const int levelWidth, const int levelHeight, const int spriteWidth, const int spriteHeight) : levelTiles(levelWidth, levelHeight), screen(resX / spriteWidth, resY / spriteHeight), console(resX / spriteWidth / 5, resY / spriteHeight), entityList(new std::list<std::shared_ptr<Entity>>), displayControler(file, spriteWidth, spriteHeight, resX, resY), inputController(entityList, movementController), movementController(entityList, levelTiles)
 {
-	levelTiles.generate(50, entityList);
+	const int numFeatures = 50;
+	levelTiles.generate(numFeatures, entityList);
 	
 	for (std::shared_ptr<Entity> ent : *entityList)
 	{
@@ -52,13 +59,7 @@ GameController::~GameController()
 
 bool GameController::updateGame()
 {
-	for (std::shared_ptr<Entity> ent : *entityList)
-	{
-		if (ent->isDead())
-		{
-			entityList->remove(ent);
-		}
-	}
+	entityList->remove_if(isDeadHelper);
 
 	while (SDL_PollEvent(&e))
 	{
@@ -83,7 +84,7 @@ bool GameController::updateGame()
 
 void GameController::displayGame()
 {
-	
+
 	//reseting sight
 	for (int y = 0; y < levelTiles.HEIGHT; y++)
 	{

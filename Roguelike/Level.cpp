@@ -40,6 +40,18 @@ Level::~Level()
 {
 }
 
+void Level::clear()
+{
+	for (int y = 0; y < HEIGHT; y++)
+	{
+		for (int x = 0; x < WIDTH; x++)
+		{
+			SetTile(x, y, nullptr);
+		}
+	}
+	rooms.clear();
+	exits.clear();
+}
 
 bool Level::createFeature()
 {
@@ -375,7 +387,7 @@ void Level::generate(int maxFeatures, EntityList entityList)
 		}
 	}
 
-	if (!placePlayer("nobel", entityList))
+	while (!placePlayer("nobel", entityList))
 	{
 		std::cout << "Unable to place player.\n";
 	}
